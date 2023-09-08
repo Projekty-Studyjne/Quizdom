@@ -75,19 +75,20 @@ public class Server implements IServer {
 
         @Override
         public void run() {
-            while (true) {
-                try {
+            try {
+                while (true) {
                     new Handler(this.listener.accept()).start();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                try {
+                    this.listener.close();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-                } finally {
-                    try {
-                        this.listener.close();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
                 }
             }
+
         }
 
         public void closeSocket() throws IOException {
