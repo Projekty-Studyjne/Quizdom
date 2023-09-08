@@ -130,7 +130,10 @@ public class Server implements IServer {
                                     mReply.setMsgType(MessageType.USER_JOINED);
                                     mReply.setNickname(incomingMsg.getNickname());
                                     mReply.setMsgType(MessageType.CONNECT_OK);
+                                    mReply.setNickname(nickname);
+                                    mReply.setContent(getUserList());
                                 }
+                                output.writeObject(mReply);
                                 break;
                             }
                             case READY: {
