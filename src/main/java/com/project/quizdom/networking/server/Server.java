@@ -77,7 +77,7 @@ public class Server implements IServer {
         public void run() {
             while (true) {
                 try {
-                    new Handler( listener.accept()).start();
+                    new Handler(this.listener.accept()).start();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -111,49 +111,51 @@ public class Server implements IServer {
                 ObjectOutputStream output = new ObjectOutputStream(os);
                 while (this.socket.isConnected()) {
                     Message incomingMsg = (Message) input.readObject();
-                    switch (incomingMsg.getMsgType()) {
-                        case CONNECT: {
-                            Message mReply = new Message();
-                            if (users.size() == maxNumUsers) {
-                                mReply.setMsgType(MessageType.CONNECT_FAILED);
-                                mReply.setNickname("");
-                            } else if (!controller.isRoomOpen()) {
-                                mReply.setMsgType(MessageType.CONNECT_FAILED);
-                                mReply.setNickname("");
-                            } else {
-                                User user = new User(incomingMsg.getNickname(), this.socket.getInetAddress());
-                                users.add(user);
-                                writers.add(output);
-                                controller.addUser(user);
-                                mReply.setMsgType(MessageType.USER_JOINED);
-                                mReply.setNickname(incomingMsg.getNickname());
-                                mReply.setMsgType(MessageType.CONNECT_OK);
-                            }
-                            break;
-                        }
-                        case READY: {
-                            controller.updateReady(incomingMsg.getNickname(), Boolean.parseBoolean(incomingMsg.getContent()));
-                            for (User user : users) {
-                                if (user.getNickname().equals(incomingMsg.getNickname())) {
-                                    user.setReady(Boolean.parseBoolean(incomingMsg.getContent()));
-                                    break;
+                    if (incomingMsg != null) {
+                        switch (incomingMsg.getMsgType()) {
+                            case CONNECT: {
+                                Message mReply = new Message();
+                                if (users.size() == maxNumUsers) {
+                                    mReply.setMsgType(MessageType.CONNECT_FAILED);
+                                    mReply.setNickname("");
+                                } else if (!controller.isRoomOpen()) {
+                                    mReply.setMsgType(MessageType.CONNECT_FAILED);
+                                    mReply.setNickname("");
+                                } else {
+                                    User user = new User(incomingMsg.getNickname(), this.socket.getInetAddress());
+                                    users.add(user);
+                                    writers.add(output);
+                                    controller.addUser(user);
+                                    mReply.setMsgType(MessageType.USER_JOINED);
+                                    mReply.setNickname(incomingMsg.getNickname());
+                                    mReply.setMsgType(MessageType.CONNECT_OK);
                                 }
+                                break;
                             }
-                            controller.enableStartGame(checkCanStartGame());
-                            break;
-                        }
-                        case DISCONNECT: {
-                            controller.removeUser(incomingMsg.getNickname());
-                            for (int i = 1; i < users.size(); i++) {
-                                if (users.get(i).getNickname().equals(incomingMsg.getNickname())) {
-                                    users.remove(i);
-                                    writers.remove(i);
-                                    break;
+                            case READY: {
+                                controller.updateReady(incomingMsg.getNickname(), Boolean.parseBoolean(incomingMsg.getContent()));
+                                for (User user : users) {
+                                    if (user.getNickname().equals(incomingMsg.getNickname())) {
+                                        user.setReady(Boolean.parseBoolean(incomingMsg.getContent()));
+                                        break;
+                                    }
                                 }
+                                controller.enableStartGame(checkCanStartGame());
+                                break;
                             }
-                            controller.enableStartGame(checkCanStartGame());
-                            socket.close();
-                            break;
+                            case DISCONNECT: {
+                                controller.removeUser(incomingMsg.getNickname());
+                                for (int i = 1; i < users.size(); i++) {
+                                    if (users.get(i).getNickname().equals(incomingMsg.getNickname())) {
+                                        users.remove(i);
+                                        writers.remove(i);
+                                        break;
+                                    }
+                                }
+                                controller.enableStartGame(checkCanStartGame());
+                                socket.close();
+                                break;
+                            }
                         }
                     }
                 }
