@@ -1,8 +1,9 @@
 package com.project.quizdom.model;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Message {
+public class Message implements Serializable {
     private MessageType msgType;
     private String nickname;
     private String content;

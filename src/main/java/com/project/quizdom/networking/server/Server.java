@@ -77,8 +77,7 @@ public class Server implements IServer {
         public void run() {
             while (true) {
                 try {
-                    Handler handler = new Handler(this.listener.accept());
-                    handler.start();
+                    new Handler( listener.accept()).start();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
