@@ -308,6 +308,12 @@ public class Controller {
     }
 
     @FXML
+    public void onStartGameClicked() throws IOException {
+        this.client.sendStart();
+        this.startGame();
+    }
+
+    @FXML
     void onBtnAClicked() {
         if (currentAnswer.contains("A")) {
             score++;
@@ -418,6 +424,18 @@ public class Controller {
                     break;
                 }
             }
+        }
+    }
+
+    public void startGame() {
+        if (this.state == State.MP_CLIENT) {
+            state = State.MP_START;
+            vboxClientLobby.setVisible(false);
+            vboxCategory.setVisible(true);
+        } else if (this.state == State.MP_SERVER) {
+            state = State.MP_START;
+            vboxServerLobby.setVisible(false);
+            vboxCategory.setVisible(true);
         }
     }
 

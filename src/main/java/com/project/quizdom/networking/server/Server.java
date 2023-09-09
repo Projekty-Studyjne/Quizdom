@@ -147,6 +147,10 @@ public class Server implements IServer {
                                 controller.enableStartGame(checkCanStartGame());
                                 break;
                             }
+                            case START_GAME:{
+                                controller.startGame();
+                                break;
+                            }
                             case DISCONNECT: {
                                 controller.removeUser(incomingMsg.getNickname());
                                 for (int i = 1; i < users.size(); i++) {
