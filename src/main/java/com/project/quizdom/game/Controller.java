@@ -470,7 +470,7 @@ public class Controller {
     }
 
     public void enableStartGame(boolean value) {
-        this.btnStartGame.setDisable(value);
+        this.btnStartGame.setDisable(!value);
     }
 
     public void closeConnection() throws IOException {
