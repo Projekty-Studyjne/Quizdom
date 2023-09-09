@@ -309,6 +309,7 @@ public class Controller {
 
     @FXML
     public void onStartGameClicked() throws IOException {
+        server.sendStartGame();
         this.startGame();
     }
 
