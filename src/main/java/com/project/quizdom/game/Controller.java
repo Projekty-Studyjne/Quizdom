@@ -309,7 +309,6 @@ public class Controller {
 
     @FXML
     public void onStartGameClicked() throws IOException {
-        this.client.sendStart();
         this.startGame();
     }
 
@@ -427,10 +426,11 @@ public class Controller {
         }
     }
 
-    public void startGame() {
+    public void startGame() throws IOException {
         if (this.state == State.MP_CLIENT) {
             vboxClientLobby.setVisible(false);
             vboxCategory.setVisible(true);
+            client.sendStart();
         } else if (this.state == State.MP_SERVER) {
             vboxServerLobby.setVisible(false);
             vboxCategory.setVisible(true);
