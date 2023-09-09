@@ -129,7 +129,7 @@ public class Controller {
             hboxClient.setSpacing(10);
             hboxClient.setVisible(false);
             nicknameClient.setPrefWidth(200);
-            nicknameClient.setTextFill(Paint.valueOf("white"));
+            nicknameClient.setTextFill(Paint.valueOf("black"));
             hboxClient.getChildren().add(nicknameClient);
             this.listNicknameClient.add(nicknameClient);
 
@@ -145,12 +145,12 @@ public class Controller {
             hboxServer.setSpacing(10);
             hboxServer.setVisible(false);
             nicknameServer.setPrefWidth(200);
-            nicknameServer.setTextFill(Paint.valueOf("white"));
+            nicknameServer.setTextFill(Paint.valueOf("black"));
             hboxServer.getChildren().add(nicknameServer);
             this.listNicknameServer.add(nicknameServer);
 
             readyServer.setPrefSize(25, 25);
-            readyServer.setStyle("-fx-background-color: red");
+            readyServer.setStyle(i == 0 ? "-fx-background-color: green" : "-fx-background-color: red");
             readyServer.setVisible(i != 0);
             hboxServer.getChildren().add(readyServer);
             this.listReadyServer.add(readyServer);
@@ -459,10 +459,10 @@ public class Controller {
         Platform.runLater(() -> {
             if (this.state == State.MP_CLIENT) {
                 for (int i = 0; i < users.size(); i++) {
-                    User u = users.get(i);
-                    this.listNicknameClient.get(i).setText(u.getNickname());
+                    User user = users.get(i);
+                    this.listNicknameClient.get(i).setText(user.getNickname());
                     this.lstClientUsers.getItems().get(i).setVisible(true);
-                    this.listReadyClient.get(i).setStyle(u.isReady() ? "-fx-background-color: green" : "-fx-background-color: red");
+                    this.listReadyClient.get(i).setStyle(user.isReady() ? "-fx-background-color: green" : "-fx-background-color: red");
                 }
                 this.connectedUsers = users.size();
             }
