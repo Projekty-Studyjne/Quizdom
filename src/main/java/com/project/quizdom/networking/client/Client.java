@@ -42,6 +42,7 @@ public class Client implements IClient {
     public void sendStart() throws IOException {
         Message message = new Message(MessageType.START_GAME, this.nickname, "");
         this.sendMessage(message);
+        controller.startGame();
     }
 
     private List<User> extractUserList(String s) {
