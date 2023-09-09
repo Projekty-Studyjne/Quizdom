@@ -58,11 +58,21 @@ public class Server implements IServer {
 
     @Override
     public void sendStartGame() throws IOException {
-        Message message = new Message(MessageType.START_GAME,this.nickname,"START!");
+        Message message = new Message(MessageType.START_GAME, this.nickname, "START!");
         for (int i = 1; i < this.users.size(); i++) {
             message.setNickname(this.users.get(i).getNickname());
             this.writers.get(i).writeObject(message);
         }
+    }
+
+    @Override
+    public void sendCategory() throws IOException {
+        Message message = new Message(MessageType.CATEGORY, this.nickname, "");
+        for (int i = 1; i < this.users.size(); i++) {
+            message.setNickname(this.users.get(i).getNickname());
+            this.writers.get(i).writeObject(message);
+        }
+
     }
 
     private String getUserList() {
@@ -156,8 +166,12 @@ public class Server implements IServer {
                                 controller.enableStartGame(checkCanStartGame());
                                 break;
                             }
-                            case START_GAME:{
+                            case START_GAME: {
                                 controller.startGame();
+                                break;
+                            }
+                            case CATEGORY: {
+                                controller.setCategory();
                                 break;
                             }
                             case DISCONNECT: {

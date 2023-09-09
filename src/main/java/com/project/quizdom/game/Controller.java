@@ -23,10 +23,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Controller {
     @FXML
@@ -64,6 +61,14 @@ public class Controller {
     @FXML
     private Button btnD;
     @FXML
+    private Button btnCategory1;
+    @FXML
+    private Button btnCategory2;
+    @FXML
+    private Button btnCategory3;
+    @FXML
+    private Button btnCategory4;
+    @FXML
     private Button btnReady;
     @FXML
     private Button btnStartGame;
@@ -93,6 +98,7 @@ public class Controller {
     private ArrayList<Label> listReadyClient;
     private ArrayList<Label> listNicknameServer;
     private ArrayList<Label> listReadyServer;
+    private ArrayList<String> randomCategory;
 
 
     public Controller() {
@@ -100,6 +106,7 @@ public class Controller {
 
     public void initialize() {
         this.state = State.MULTIPLAYER;
+        randomCategory = new ArrayList<>();
 
         this.vboxPlay.setVisible(true);
         this.vboxQuiz.setVisible(false);
@@ -167,6 +174,18 @@ public class Controller {
         btnB.setDisable(true);
         btnC.setDisable(true);
         btnD.setDisable(true);
+    }
+    private void disableCategory(){
+        btnCategory1.setDisable(true);
+        btnCategory2.setDisable(true);
+        btnCategory3.setDisable(true);
+        btnCategory4.setDisable(true);
+    }
+    private void turOnCategory(){
+        btnCategory1.setDisable(false);
+        btnCategory2.setDisable(false);
+        btnCategory3.setDisable(false);
+        btnCategory4.setDisable(false);
     }
 
     private void turnOnAll() {
@@ -252,6 +271,15 @@ public class Controller {
         } catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);
         }
+    }
+    private String drawCategory(){
+        String category="";
+        Random random=new Random();
+        int randomValue = random.nextInt();
+        if(randomCategory.size()==2){
+            category=randomCategory.get(randomValue);
+        }
+        return category;
     }
 
 
@@ -350,39 +378,74 @@ public class Controller {
     }
 
     @FXML
-    void onCategory1Clicked() throws FileNotFoundException {
-        setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
-        this.vboxCategory.setVisible(false);
-        this.vboxQuiz.setVisible(true);
+    void onCategory1Clicked() throws IOException {
+        addCategory("Math");
+        disableCategory();
     }
 
     @FXML
-    void onCategory2Clicked() throws FileNotFoundException {
-        setQuestions("src/main/java/com/project/quizdom/game/file/ogolna.txt");
-        this.vboxCategory.setVisible(false);
-        this.vboxQuiz.setVisible(true);
+    void onCategory2Clicked() throws IOException {
+        addCategory("General");
+        disableCategory();
     }
 
     @FXML
-    void onCategory3Clicked() throws FileNotFoundException {
-        setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
-        this.vboxCategory.setVisible(false);
-        this.vboxQuiz.setVisible(true);
+    void onCategory3Clicked() throws IOException {
+        addCategory("Physics");
+        disableCategory();
     }
 
     @FXML
-    void onCategory4Clicked() throws FileNotFoundException {
-        setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
-        this.vboxCategory.setVisible(false);
-        this.vboxQuiz.setVisible(true);
+    void onCategory4Clicked() throws IOException {
+        addCategory("Biology");
+        disableCategory();
     }
 
+    public void setCategory() throws IOException {
+        switch (drawCategory()){
+            case "Math":{
+                setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
+                switchToCategory();
+                break;
+            }
+            case "General":{
+                setQuestions("src/main/java/com/project/quizdom/game/file/ogolna.txt");
+                switchToCategory();
+                break;
+            }
+            case "Physics":{
+                setQuestions("src/main/java/com/project/quizdom/game/file/fizyka.txt");
+                switchToCategory();
+                break;
+            }
+            case "Biology":{
+                setQuestions("src/main/java/com/project/quizdom/game/file/biologia.txt");
+                switchToCategory();
+                break;
+            }
+        }
+    }
+    public void addCategory(String category) throws IOException {
+        if (this.state == State.MP_CLIENT) {
+            client.sendCategory(category);
+        } else if (this.state == State.MP_SERVER) {
+            randomCategory.add(category);
+            server.sendCategory();
+        }
+    }
+    public void addToCategory(String category){
+        randomCategory.add(category);
+    }
 
     void setQuestions(String category) throws FileNotFoundException {
         startTimer();
         Quiz quiz = new Quiz();
         questions = quiz.getQuestions(category);
         nextQuestion();
+    }
+    public void switchToCategory(){
+        vboxCategory.setVisible(false);
+        vboxQuiz.setVisible(true);
     }
 
     public void switchToMP() {
@@ -431,13 +494,11 @@ public class Controller {
         if (this.state == State.MP_CLIENT) {
             vboxClientLobby.setVisible(false);
             vboxCategory.setVisible(true);
-   //         client.sendStart();
         } else if (this.state == State.MP_SERVER) {
             vboxServerLobby.setVisible(false);
             vboxCategory.setVisible(true);
         }
     }
-
     public void resetList() {
         if (this.state == State.MP_CLIENT) {
             Platform.runLater(() -> {

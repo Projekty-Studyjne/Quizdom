@@ -7,5 +7,5 @@ public interface IClient {
 
     public void sendClose() throws IOException;
 
-    //public void sendStart() throws IOException;
+    public void sendCategory(String category) throws IOException;
 }

@@ -38,11 +38,11 @@ public class Client implements IClient {
         this.sendMessage(message);
     }
 
-//    @Override
-//    public void sendStart() throws IOException {
-//        Message message = new Message(MessageType.START_GAME, this.nickname, "");
-//        this.sendMessage(message);
-//    }
+    @Override
+    public void sendCategory(String category) throws IOException {
+        Message message = new Message(MessageType.CATEGORY, this.nickname,category);
+        this.sendMessage(message);
+    }
 
     private List<User> extractUserList(String s) {
         List<User> list = new ArrayList<User>();
@@ -100,6 +100,11 @@ public class Client implements IClient {
                             }
                             case START_GAME:{
                                 controller.startGame();
+                                break;
+                            }
+                            case CATEGORY:{
+                                controller.addToCategory(incomingMessage.getContent());
+                                controller.setCategory();
                                 break;
                             }
                             case DISCONNECT: {
