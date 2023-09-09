@@ -171,6 +171,7 @@ public class Server implements IServer {
                                 break;
                             }
                             case CATEGORY: {
+                                controller.addToCategory(incomingMsg.getContent());
                                 controller.setCategory();
                                 break;
                             }
