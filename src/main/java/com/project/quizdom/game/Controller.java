@@ -448,7 +448,7 @@ public class Controller {
                 this.connectedUsers++;
             } else if (this.state == State.MP_SERVER) {
                 this.listNicknameServer.get(this.connectedUsers).setText(user.getNickname());
-                this.lstClientUsers.getItems().get(this.connectedUsers).setVisible(true);
+                this.lstServerUsers.getItems().get(this.connectedUsers).setVisible(true);
                 this.connectedUsers++;
                 this.btnStartGame.setDisable(true);
             }
