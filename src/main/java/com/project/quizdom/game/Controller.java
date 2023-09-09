@@ -429,11 +429,9 @@ public class Controller {
 
     public void startGame() {
         if (this.state == State.MP_CLIENT) {
-            state = State.MP_START;
             vboxClientLobby.setVisible(false);
             vboxCategory.setVisible(true);
         } else if (this.state == State.MP_SERVER) {
-            state = State.MP_START;
             vboxServerLobby.setVisible(false);
             vboxCategory.setVisible(true);
         }
