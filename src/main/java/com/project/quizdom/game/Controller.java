@@ -431,7 +431,7 @@ public class Controller {
         if (this.state == State.MP_CLIENT) {
             vboxClientLobby.setVisible(false);
             vboxCategory.setVisible(true);
-            client.sendStart();
+   //         client.sendStart();
         } else if (this.state == State.MP_SERVER) {
             vboxServerLobby.setVisible(false);
             vboxCategory.setVisible(true);

@@ -38,11 +38,11 @@ public class Client implements IClient {
         this.sendMessage(message);
     }
 
-    @Override
-    public void sendStart() throws IOException {
-        Message message = new Message(MessageType.START_GAME, this.nickname, "");
-        this.sendMessage(message);
-    }
+//    @Override
+//    public void sendStart() throws IOException {
+//        Message message = new Message(MessageType.START_GAME, this.nickname, "");
+//        this.sendMessage(message);
+//    }
 
     private List<User> extractUserList(String s) {
         List<User> list = new ArrayList<User>();
