@@ -434,6 +434,9 @@ public class Controller {
             randomCategory.add(category);
             server.sendCategory();
         }
+        if(getSizeCategory()==2){
+            switchToCategory();
+        }
     }
 
     public void addToCategory(String category) {
