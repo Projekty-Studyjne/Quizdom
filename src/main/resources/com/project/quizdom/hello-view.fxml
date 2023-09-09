@@ -37,11 +37,11 @@
             <Button fx:id="btnJoinRoom" mnemonicParsing="false" onMouseClicked="#onJoinExistingRoomClicked" text="Join" />
          </children>
       </VBox>
-      <VBox fx:id="vboxClientLobby" prefHeight="501.0" prefWidth="633.0" visible="false">
+      <VBox fx:id="vboxClientLobby" prefHeight="501.0" prefWidth="633.0">
          <children>
             <Text fx:id="lblUserListClient" strokeType="OUTSIDE" strokeWidth="0.0" text="User list:" wrappingWidth="154.783203125" />
             <ListView fx:id="lstClientUsers" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="btnReady" mnemonicParsing="false" onMouseClicked="#onReadyClicked" text="Not ready" />
+            <Button fx:id="btnReady" mnemonicParsing="false" onMouseClicked="#onReadyClicked" text="Not Ready" />
          </children>
       </VBox>
       <VBox fx:id="vboxServerLobby" prefHeight="501.0" prefWidth="633.0" visible="false">
@@ -75,7 +75,7 @@
             <Text fx:id="lblScore" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="441.13671875" />
          </children>
       </VBox>
-      <VBox fx:id="vboxConnecting" prefHeight="501.0" prefWidth="639.0">
+      <VBox fx:id="vboxConnecting" prefHeight="501.0" prefWidth="639.0" visible="false">
          <children>
             <Text fx:id="lblConnecting" strokeType="OUTSIDE" strokeWidth="0.0" text="Connecting..." wrappingWidth="629.13671875">
                <font>

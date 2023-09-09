@@ -284,7 +284,7 @@ public class Controller {
 
     @FXML
     public void onJoinExistingRoomClicked() {
-        this.btnReady.setText("Not ready");
+        this.btnReady.setText("Not Ready");
         this.btnReady.setStyle("-fx-background-color: red");
         this.showConnectingBox(true);
         this.client = new Client(this, this.txtIPAddress.getText(), 9001, this.txtNicknameJoin.getText());
