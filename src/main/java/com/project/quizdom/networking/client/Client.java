@@ -74,9 +74,11 @@ public class Client implements IClient {
                     if (incomingMessage != null) {
                         switch (incomingMessage.getMsgType()) {
                             case CONNECT_FAILED: {
+                                controller.showConnectingBox(false);
                                 break;
                             }
                             case CONNECT_OK: {
+                                controller.showConnectingBox(false);
                                 controller.switchToClientRoom();
                                 controller.resetList();
                                 controller.updateUserList(extractUserList(incomingMessage.getContent()));

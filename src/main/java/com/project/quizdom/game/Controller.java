@@ -54,6 +54,8 @@ public class Controller {
     @FXML
     private VBox vboxCategory;
     @FXML
+    private VBox vboxConnecting;
+    @FXML
     private Button btnA;
     @FXML
     private Button btnB;
@@ -107,6 +109,7 @@ public class Controller {
         this.vboxClientLobby.setVisible(false);
         this.vboxJoinRoom.setVisible(false);
         this.vboxCreateRoom.setVisible(false);
+        this.vboxConnecting.setVisible(false);
 
         this.listNicknameClient = new ArrayList<Label>();
         this.listReadyClient = new ArrayList<Label>();
@@ -249,7 +252,6 @@ public class Controller {
         } catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
@@ -284,6 +286,7 @@ public class Controller {
     public void onJoinExistingRoomClicked() {
         this.btnReady.setText("Not ready");
         this.btnReady.setStyle("-fx-background-color: red");
+        this.showConnectingBox(true);
         this.client = new Client(this, this.txtIPAddress.getText(), 9001, this.txtNicknameJoin.getText());
         this.server = null;
 
@@ -395,7 +398,7 @@ public class Controller {
     }
 
     public void switchToClientRoom() {
-        this.vboxCreateRoom.setVisible(false);
+        this.vboxJoinRoom.setVisible(false);
         this.vboxClientLobby.setVisible(true);
         this.state = State.MP_CLIENT;
     }
@@ -447,7 +450,6 @@ public class Controller {
                 this.listNicknameServer.get(this.connectedUsers).setText(user.getNickname());
                 this.lstClientUsers.getItems().get(this.connectedUsers).setVisible(true);
                 this.connectedUsers++;
-
                 this.btnStartGame.setDisable(true);
             }
         });
@@ -499,10 +501,11 @@ public class Controller {
         });
     }
 
+    public void showConnectingBox(boolean value) {
+        this.vboxConnecting.setVisible(value);
+    }
 
     public boolean isRoomOpen() {
         return true;
     }
-
-
 }
