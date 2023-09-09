@@ -175,13 +175,15 @@ public class Controller {
         btnC.setDisable(true);
         btnD.setDisable(true);
     }
-    private void disableCategory(){
+
+    private void disableCategory() {
         btnCategory1.setDisable(true);
         btnCategory2.setDisable(true);
         btnCategory3.setDisable(true);
         btnCategory4.setDisable(true);
     }
-    private void turOnCategory(){
+
+    private void turOnCategory() {
         btnCategory1.setDisable(false);
         btnCategory2.setDisable(false);
         btnCategory3.setDisable(false);
@@ -225,12 +227,14 @@ public class Controller {
         countdown = 10;
         initialCountdown = 2;
         if (questions != null && i < questions.size()) {
-            lblQuestion.setText(questions.get(i++));
-            btnA.setText(questions.get(i++));
-            btnB.setText(questions.get(i++));
-            btnC.setText(questions.get(i++));
-            btnD.setText(questions.get(i++));
-            currentAnswer = questions.get(i++);
+            Platform.runLater(() -> {
+                lblQuestion.setText(questions.get(i++));
+                btnA.setText(questions.get(i++));
+                btnB.setText(questions.get(i++));
+                btnC.setText(questions.get(i++));
+                btnD.setText(questions.get(i++));
+                currentAnswer = questions.get(i++);
+            });
         } else {
             this.vboxScore.setVisible(true);
             this.vboxQuiz.setVisible(false);
@@ -272,12 +276,13 @@ public class Controller {
             throw new RuntimeException(e);
         }
     }
-    private String drawCategory(){
-        String category="";
-        Random random=new Random();
+
+    private String drawCategory() {
+        String category = "";
+        Random random = new Random();
         int randomValue = random.nextInt(2);
-        if(randomCategory.size()==2){
-            category=randomCategory.get(randomValue);
+        if (randomCategory.size() == 2) {
+            category = randomCategory.get(randomValue);
         }
         return category;
     }
@@ -402,25 +407,26 @@ public class Controller {
     }
 
     public void setCategory() throws IOException {
-        switch (drawCategory()){
-            case "Math":{
+        switch (drawCategory()) {
+            case "Math": {
                 setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
                 break;
             }
-            case "General":{
+            case "General": {
                 setQuestions("src/main/java/com/project/quizdom/game/file/ogolna.txt");
                 break;
             }
-            case "Physics":{
+            case "Physics": {
                 setQuestions("src/main/java/com/project/quizdom/game/file/fizyka.txt");
                 break;
             }
-            case "Biology":{
+            case "Biology": {
                 setQuestions("src/main/java/com/project/quizdom/game/file/biologia.txt");
                 break;
             }
         }
     }
+
     public void addCategory(String category) throws IOException {
         if (this.state == State.MP_CLIENT) {
             client.sendCategory(category);
@@ -429,7 +435,8 @@ public class Controller {
             server.sendCategory();
         }
     }
-    public void addToCategory(String category){
+
+    public void addToCategory(String category) {
         randomCategory.add(category);
     }
 
@@ -439,11 +446,13 @@ public class Controller {
         questions = quiz.getQuestions(category);
         nextQuestion();
     }
-    public void switchToCategory(){
+
+    public void switchToCategory() {
         vboxCategory.setVisible(false);
         vboxQuiz.setVisible(true);
     }
-    public int getSizeCategory(){
+
+    public int getSizeCategory() {
         return randomCategory.size();
     }
 
@@ -498,6 +507,7 @@ public class Controller {
             vboxCategory.setVisible(true);
         }
     }
+
     public void resetList() {
         if (this.state == State.MP_CLIENT) {
             Platform.runLater(() -> {
