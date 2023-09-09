@@ -12,24 +12,19 @@ import java.util.List;
 
 public class Client implements IClient {
     private final Controller controller;
-    private ClientListener clientListener;
-    private String nickname;
-    private OutputStream os;
+    private final String nickname;
     private ObjectOutputStream output;
-    private InputStream is;
-    private ObjectInputStream input;
 
     public Client(Controller controller, String address, int port, String nickname) {
         this.controller = controller;
         this.nickname = nickname;
-        this.clientListener = new ClientListener(address, port);
-        this.clientListener.start();
+        ClientListener clientListener = new ClientListener(address, port);
+        clientListener.start();
     }
 
     private void sendMessage(Message message) throws IOException {
         this.output.writeObject(message);
     }
-
 
     @Override
     public void sendReady(boolean ready) throws IOException {
@@ -56,9 +51,8 @@ public class Client implements IClient {
     }
 
     private class ClientListener extends Thread {
-        private Socket socket;
-        private String address;
-        private int port;
+        private final String address;
+        private final int port;
 
         public ClientListener(String address, int port) {
             this.address = address;
@@ -68,14 +62,14 @@ public class Client implements IClient {
         @Override
         public void run() {
             try {
-                this.socket = new Socket(address, port);
-                os = this.socket.getOutputStream();
+                Socket socket = new Socket(address, port);
+                OutputStream os = socket.getOutputStream();
                 output = new ObjectOutputStream(os);
-                is = this.socket.getInputStream();
-                input = new ObjectInputStream(is);
+                InputStream is = socket.getInputStream();
+                ObjectInputStream input = new ObjectInputStream(is);
                 Message message = new Message(MessageType.CONNECT, nickname, "");
                 output.writeObject(message);
-                while (this.socket.isConnected()) {
+                while (socket.isConnected()) {
                     Message incomingMessage = (Message) input.readObject();
                     if (incomingMessage != null) {
                         switch (incomingMessage.getMsgType()) {
@@ -88,27 +82,24 @@ public class Client implements IClient {
                                 controller.updateUserList(extractUserList(incomingMessage.getContent()));
                                 break;
                             }
-                            case USER_JOINED:{
+                            case USER_JOINED: {
                                 controller.addUser(new User(incomingMessage.getNickname()));
                                 break;
                             }
-                            case READY:{
-                                controller.updateReady(incomingMessage.getNickname(),Boolean.parseBoolean(incomingMessage.getContent()));
+                            case READY: {
+                                controller.updateReady(incomingMessage.getNickname(), Boolean.parseBoolean(incomingMessage.getContent()));
                             }
-                            case DISCONNECT:{
-                                if(incomingMessage.getNickname().equals(nickname)){
+                            case DISCONNECT: {
+                                if (incomingMessage.getNickname().equals(nickname)) {
                                     controller.switchToMP();
-                                }else{
+                                } else {
                                     controller.removeUser(incomingMessage.getNickname());
                                     break;
                                 }
                             }
                         }
                     }
-
-
                 }
-
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }

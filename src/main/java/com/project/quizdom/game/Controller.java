@@ -275,7 +275,7 @@ public class Controller {
         this.resetList();
         this.btnStartGame.setDisable(true);
         this.listNicknameServer.get(0).setText(this.txtNicknameCreate.getText());
-        this.lstServerUsers.getItems().get(0).setVisible(true); //????????????????????????
+        this.lstServerUsers.getItems().get(0).setVisible(true);
         this.connectedUsers = 1;
 
     }

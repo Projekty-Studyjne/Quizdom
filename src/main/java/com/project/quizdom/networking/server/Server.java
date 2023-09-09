@@ -17,7 +17,7 @@ public class Server implements IServer {
     private final String nickname;
     private final ArrayList<User> users;
     private ServerListener serverListener;
-    private ArrayList<ObjectOutputStream> writers;
+    private final ArrayList<ObjectOutputStream> writers;
 
     public Server(Controller controller, String nickname, int usersRequired) throws IOException {
         this.controller = controller;
