@@ -56,6 +56,15 @@ public class Server implements IServer {
         serverListener.closeSocket();
     }
 
+    @Override
+    public void sendStartGame() throws IOException {
+        Message message = new Message(MessageType.START_GAME,this.nickname,"START!");
+        for (int i = 1; i < this.users.size(); i++) {
+            message.setNickname(this.users.get(i).getNickname());
+            this.writers.get(i).writeObject(message);
+        }
+    }
+
     private String getUserList() {
         StringBuilder list = new StringBuilder("");
         for (int i = 0; i < this.users.size(); i++) {
