@@ -40,7 +40,7 @@ public class Client implements IClient {
 
     @Override
     public void sendCategory(String category) throws IOException {
-        Message message = new Message(MessageType.CATEGORY, this.nickname,category);
+        Message message = new Message(MessageType.CATEGORY, this.nickname, category);
         this.sendMessage(message);
     }
 
@@ -98,13 +98,16 @@ public class Client implements IClient {
                                 controller.updateReady(incomingMessage.getNickname(), Boolean.parseBoolean(incomingMessage.getContent()));
                                 break;
                             }
-                            case START_GAME:{
+                            case START_GAME: {
                                 controller.startGame();
                                 break;
                             }
-                            case CATEGORY:{
+                            case CATEGORY: {
                                 controller.addToCategory(incomingMessage.getContent());
-                                controller.setCategory();
+                                if (controller.getSizeCategory() == 2) {
+                                    controller.switchToCategory();
+                                    controller.setCategory();
+                                }
                                 break;
                             }
                             case DISCONNECT: {

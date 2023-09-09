@@ -405,22 +405,18 @@ public class Controller {
         switch (drawCategory()){
             case "Math":{
                 setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
-                switchToCategory();
                 break;
             }
             case "General":{
                 setQuestions("src/main/java/com/project/quizdom/game/file/ogolna.txt");
-                switchToCategory();
                 break;
             }
             case "Physics":{
                 setQuestions("src/main/java/com/project/quizdom/game/file/fizyka.txt");
-                switchToCategory();
                 break;
             }
             case "Biology":{
                 setQuestions("src/main/java/com/project/quizdom/game/file/biologia.txt");
-                switchToCategory();
                 break;
             }
         }
@@ -446,6 +442,9 @@ public class Controller {
     public void switchToCategory(){
         vboxCategory.setVisible(false);
         vboxQuiz.setVisible(true);
+    }
+    public int getSizeCategory(){
+        return randomCategory.size();
     }
 
     public void switchToMP() {
