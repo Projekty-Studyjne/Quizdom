@@ -181,7 +181,9 @@ public class Server implements IServer {
                             }
                             case CATEGORY: {
                                 controller.addToCategory(incomingMsg.getContent());
-                                controller.setCategory();
+                                if(controller.getSizeCategory()==2){
+                                controller.startCategory();
+                                }
                                 break;
                             }
                             case QUIZ: {

@@ -109,8 +109,8 @@ public class Client implements IClient {
                                 break;
                             }
                             case CATEGORY: {
-                                controller.addToCategory(incomingMessage.getContent());
-                                controller.setCategory();
+                                controller.setCategory(incomingMessage.getContent());
+                                controller.switchToQuiz();
                                 break;
                             }
                             case QUIZ:{

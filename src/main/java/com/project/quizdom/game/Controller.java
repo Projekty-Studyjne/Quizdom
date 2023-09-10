@@ -406,8 +406,8 @@ public class Controller {
         disableCategory();
     }
 
-    public void setCategory() throws IOException {
-        switch (drawCategory()) {
+    public void setCategory(String category) throws IOException {
+        switch (category) {
             case "Math": {
                 setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
                 break;
@@ -426,22 +426,20 @@ public class Controller {
             }
         }
     }
+    public void startCategory() throws IOException {
+        String category = drawCategory();
+        setCategory(category);
+        server.sendCategory(category);
+        switchToQuiz();
+    }
 
     public void addCategory(String category) throws IOException {
         if (this.state == State.MP_CLIENT) {
             client.sendCategory(category);
         } else if (this.state == State.MP_SERVER) {
             addToCategory(category);
-            switchToQuiz();
-            server.sendCategory(category);
-        }
-        if(randomCategory.size()==2){
-            if (this.state == State.MP_CLIENT) {
-                client.startQuiz();
-            } else if (this.state == State.MP_SERVER) {
-                addToCategory(category);
-                switchToQuiz();
-                server.startQuiz();
+            if(getSizeCategory()==2){
+                startCategory();
             }
         }
     }
