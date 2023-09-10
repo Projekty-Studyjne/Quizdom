@@ -278,6 +278,7 @@ public class Controller {
     }
 
     private String drawCategory() {
+        String category = "";
         Random random = new Random();
         int randomValue = random.nextInt(2);
         if (randomCategory.size() == 2) {
@@ -427,7 +428,7 @@ public class Controller {
     }
 
     public void startCategory() throws IOException {
-        String category = drawCategory();
+        category = drawCategory();
         setCategory(category);
         server.sendCategory(category);
         switchToQuiz();
