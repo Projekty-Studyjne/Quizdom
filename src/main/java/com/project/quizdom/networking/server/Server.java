@@ -66,13 +66,22 @@ public class Server implements IServer {
     }
 
     @Override
-    public void sendCategory() throws IOException {
+    public void sendCategory(String category) throws IOException {
         Message message = new Message(MessageType.CATEGORY, this.nickname, "");
         for (int i = 1; i < this.users.size(); i++) {
             message.setNickname(this.users.get(i).getNickname());
             this.writers.get(i).writeObject(message);
         }
 
+    }
+
+    @Override
+    public void startQuiz() throws IOException {
+        Message message = new Message(MessageType.QUIZ, this.nickname, "");
+        for (int i = 1; i < this.users.size(); i++) {
+            message.setNickname(this.users.get(i).getNickname());
+            this.writers.get(i).writeObject(message);
+        }
     }
 
     private String getUserList() {
@@ -172,10 +181,11 @@ public class Server implements IServer {
                             }
                             case CATEGORY: {
                                 controller.addToCategory(incomingMsg.getContent());
-                                if (controller.getSizeCategory() == 2) {
-                                    controller.switchToCategory();
-                                    controller.setCategory();
-                                }
+                                controller.setCategory();
+                                break;
+                            }
+                            case QUIZ: {
+                                controller.switchToQuiz();
                                 break;
                             }
                             case DISCONNECT: {

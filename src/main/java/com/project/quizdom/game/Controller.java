@@ -431,11 +431,16 @@ public class Controller {
         if (this.state == State.MP_CLIENT) {
             client.sendCategory(category);
         } else if (this.state == State.MP_SERVER) {
-            randomCategory.add(category);
-            server.sendCategory();
+            addToCategory(category);
+            server.sendCategory(category);
         }
-        if(getSizeCategory()==2){
-            switchToCategory();
+        if(randomCategory.size()==2){
+            if (this.state == State.MP_CLIENT) {
+                client.startQuiz();
+            } else if (this.state == State.MP_SERVER) {
+                addToCategory(category);
+                server.startQuiz();
+            }
         }
     }
 
@@ -450,7 +455,7 @@ public class Controller {
         nextQuestion();
     }
 
-    public void switchToCategory() {
+    public void switchToQuiz() {
         vboxCategory.setVisible(false);
         vboxQuiz.setVisible(true);
     }

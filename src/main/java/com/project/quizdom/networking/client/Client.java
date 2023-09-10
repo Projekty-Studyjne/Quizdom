@@ -44,6 +44,12 @@ public class Client implements IClient {
         this.sendMessage(message);
     }
 
+    @Override
+    public void startQuiz() throws IOException {
+        Message message = new Message(MessageType.QUIZ, this.nickname, "");
+        this.sendMessage(message);
+    }
+
     private List<User> extractUserList(String s) {
         List<User> list = new ArrayList<User>();
         String[] temp = s.split(";");
@@ -104,10 +110,11 @@ public class Client implements IClient {
                             }
                             case CATEGORY: {
                                 controller.addToCategory(incomingMessage.getContent());
-                                if (controller.getSizeCategory() == 2) {
-                                    controller.switchToCategory();
-                                    controller.setCategory();
-                                }
+                                controller.setCategory();
+                                break;
+                            }
+                            case QUIZ:{
+                                controller.switchToQuiz();
                                 break;
                             }
                             case DISCONNECT: {
