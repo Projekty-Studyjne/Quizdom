@@ -67,7 +67,7 @@ public class Server implements IServer {
 
     @Override
     public void sendCategory(String category) throws IOException {
-        Message message = new Message(MessageType.CATEGORY, this.nickname, "");
+        Message message = new Message(MessageType.CATEGORY, this.nickname, category);
         for (int i = 1; i < this.users.size(); i++) {
             message.setNickname(this.users.get(i).getNickname());
             this.writers.get(i).writeObject(message);
