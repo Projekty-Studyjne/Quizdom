@@ -432,6 +432,7 @@ public class Controller {
             client.sendCategory(category);
         } else if (this.state == State.MP_SERVER) {
             addToCategory(category);
+            switchToQuiz();
             server.sendCategory(category);
         }
         if(randomCategory.size()==2){
@@ -439,6 +440,7 @@ public class Controller {
                 client.startQuiz();
             } else if (this.state == State.MP_SERVER) {
                 addToCategory(category);
+                switchToQuiz();
                 server.startQuiz();
             }
         }
