@@ -99,7 +99,7 @@ public class Controller {
     private ArrayList<Label> listNicknameServer;
     private ArrayList<Label> listReadyServer;
     private ArrayList<String> randomCategory;
-
+    private static String category = "";
 
     public Controller() {
     }
@@ -278,7 +278,6 @@ public class Controller {
     }
 
     private String drawCategory() {
-        String category = "";
         Random random = new Random();
         int randomValue = random.nextInt(2);
         if (randomCategory.size() == 2) {
@@ -426,6 +425,7 @@ public class Controller {
             }
         }
     }
+
     public void startCategory() throws IOException {
         String category = drawCategory();
         setCategory(category);
@@ -438,7 +438,7 @@ public class Controller {
             client.sendCategory(category);
         } else if (this.state == State.MP_SERVER) {
             addToCategory(category);
-            if(getSizeCategory()==2){
+            if (getSizeCategory() == 2) {
                 startCategory();
             }
         }
