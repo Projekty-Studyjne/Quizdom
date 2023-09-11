@@ -415,9 +415,9 @@ public class Controller {
     }
     public void setScore(String score){
         if (this.state == State.MP_CLIENT) {
-            clientScore=Integer.parseInt(score);
-        } else if (this.state == State.MP_SERVER) {
             serverScore=Integer.parseInt(score);
+        } else if (this.state == State.MP_SERVER) {
+            clientScore=Integer.parseInt(score);
         }
     }
     public void setEndingScore() throws IOException {
@@ -495,10 +495,16 @@ public class Controller {
     public void switchToMP() {
         if (this.state == State.MP_CLIENT) {
             this.vboxClientLobby.setVisible(false);
+            this.vboxQuiz.setVisible(false);
+            this.vboxCategory.setVisible(false);
+            this.vboxScore.setVisible(false);
             this.vboxPlay.setVisible(true);
             this.state = State.MULTIPLAYER;
         } else if (this.state == State.MP_SERVER) {
             this.vboxServerLobby.setVisible(false);
+            this.vboxQuiz.setVisible(false);
+            this.vboxCategory.setVisible(false);
+            this.vboxScore.setVisible(false);
             this.vboxPlay.setVisible(true);
             this.state = State.MULTIPLAYER;
         }
