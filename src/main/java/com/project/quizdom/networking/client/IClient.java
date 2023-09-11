@@ -8,5 +8,6 @@ public interface IClient {
     public void sendClose() throws IOException;
 
     public void sendCategory(String category) throws IOException;
-    public void startQuiz() throws IOException;
+    public void sendCorrectAnswer(int score) throws IOException;
+    public void sendWrongAnswer(int score) throws IOException;
 }

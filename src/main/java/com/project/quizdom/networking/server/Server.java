@@ -187,7 +187,7 @@ public class Server implements IServer {
                                 break;
                             }
                             case QUIZ: {
-                                controller.switchToQuiz();
+
                                 break;
                             }
                             case DISCONNECT: {

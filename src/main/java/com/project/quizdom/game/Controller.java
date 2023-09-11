@@ -85,7 +85,8 @@ public class Controller {
     private IServer server;
     private IClient client;
     private String currentAnswer;
-    static int score = 0;
+    static int clientScore = 0;
+    static int serverScore = 0;
     private List<String> questions;
     static int i = 0;
     private final Timer timer = new Timer();
@@ -238,7 +239,7 @@ public class Controller {
         } else {
             this.vboxScore.setVisible(true);
             this.vboxQuiz.setVisible(false);
-            this.lblScore.setText(String.valueOf(score));
+            this.lblScore.setText(String.valueOf(clientScore + "---" + serverScore));
         }
     }
 
@@ -347,39 +348,27 @@ public class Controller {
     }
 
     @FXML
-    void onBtnAClicked() {
-        if (currentAnswer.contains("A")) {
-            score++;
-        }
+    void onBtnAClicked() throws IOException {
+        checkAnswer("A");
         disableAll();
-        countdown = 0;
     }
 
     @FXML
-    void onBtnBClicked() {
-        if (currentAnswer.contains("B")) {
-            score++;
-        }
+    void onBtnBClicked() throws IOException {
+        checkAnswer("B");
         disableAll();
-        countdown = 0;
     }
 
     @FXML
-    void onBtnCClicked() {
-        if (currentAnswer.contains("C")) {
-            score++;
-        }
+    void onBtnCClicked() throws IOException {
+        checkAnswer("C");
         disableAll();
-        countdown = 0;
     }
 
     @FXML
-    void onBtnDClicked() {
-        if (currentAnswer.contains("D")) {
-            score++;
-        }
+    void onBtnDClicked() throws IOException {
+        checkAnswer("D");
         disableAll();
-        countdown = 0;
     }
 
     @FXML
@@ -404,6 +393,20 @@ public class Controller {
     void onCategory4Clicked() throws IOException {
         addCategory("Biology");
         disableCategory();
+    }
+
+    public void checkAnswer(String answer) throws IOException {
+        if (this.state == State.MP_CLIENT) {
+            if (currentAnswer.contains(answer)) {
+                client.sendCorrectAnswer(clientScore++);
+            } else {
+                client.sendWrongAnswer(clientScore);
+            }
+        } else if (this.state == State.MP_SERVER) {
+            if (currentAnswer.contains(answer)) {
+                serverScore++;
+            }
+        }
     }
 
     public void setCategory(String category) throws IOException {

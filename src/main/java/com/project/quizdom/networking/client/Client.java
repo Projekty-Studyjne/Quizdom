@@ -45,9 +45,17 @@ public class Client implements IClient {
     }
 
     @Override
-    public void startQuiz() throws IOException {
-        Message message = new Message(MessageType.QUIZ, this.nickname, "");
+    public void sendCorrectAnswer(int score) throws IOException {
+        Message message = new Message(MessageType.QUIZ, this.nickname, String.valueOf(score));
         this.sendMessage(message);
+
+    }
+
+    @Override
+    public void sendWrongAnswer(int score) throws IOException {
+        Message message = new Message(MessageType.QUIZ, this.nickname, String.valueOf(score));
+        this.sendMessage(message);
+
     }
 
     private List<User> extractUserList(String s) {
@@ -113,8 +121,8 @@ public class Client implements IClient {
                                 controller.switchToQuiz();
                                 break;
                             }
-                            case QUIZ:{
-                                controller.switchToQuiz();
+                            case QUIZ: {
+
                                 break;
                             }
                             case DISCONNECT: {
