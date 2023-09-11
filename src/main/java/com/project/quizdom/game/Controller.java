@@ -217,6 +217,7 @@ public class Controller {
                         isCorrect();
                     } else {
                         Platform.runLater(() -> {
+                            initialCountdown = 2;
                             try {
                                 nextQuestion();
                             } catch (IOException e) {
@@ -232,7 +233,6 @@ public class Controller {
     private void nextQuestion() throws IOException {
         turnOnAll();
         countdown = 10;
-        initialCountdown = 2;
         if (questions != null && i < questions.size()) {
             Platform.runLater(() -> {
                 lblQuestion.setText(questions.get(i++));
@@ -410,10 +410,15 @@ public class Controller {
             if (currentAnswer.contains(answer)) {
                 serverScore++;
             }
+            server.sendScore(serverScore);
         }
     }
     public void setScore(String score){
-        clientScore=Integer.parseInt(score);
+        if (this.state == State.MP_CLIENT) {
+            clientScore=Integer.parseInt(score);
+        } else if (this.state == State.MP_SERVER) {
+            serverScore=Integer.parseInt(score);
+        }
     }
     public void setEndingScore() throws IOException {
         if (this.state == State.MP_CLIENT) {
@@ -426,7 +431,7 @@ public class Controller {
     public void switchToEnding(){
         this.vboxScore.setVisible(true);
         this.vboxQuiz.setVisible(false);
-        this.lblScore.setText(String.valueOf(clientScore + "---" + serverScore));
+        this.lblScore.setText(clientScore + "---" + serverScore);
     }
     public void setCategory(String category) throws IOException {
         switch (category) {
