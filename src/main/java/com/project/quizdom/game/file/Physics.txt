@@ -1,0 +1,180 @@
+What is the SI unit for measuring electric current?
+A. Volt
+B. Ohm
+C. Ampere
+D. Watt
+C
+What force keeps objects in orbit around the Earth?
+A. Gravity
+B. Magnetism
+C. Friction
+D. Tension
+A
+What is the fundamental particle that carries a negative electric charge?
+A. Proton
+B. Neutron
+C. Electron
+D. Photon
+C
+According to Newton's second law of motion, what is the formula for force (F)?
+A. F = m/g
+B. F = m/a
+C. F = m/v
+D. F = m/c
+B
+What is the speed of light in a vacuum?
+A. 300,000 meters per second
+B. 500,000 meters per second
+C. 600,000 meters per second
+D. 700,000 meters per second
+A
+What is the unit of measurement for frequency?
+A. Newton
+B. Hertz
+C. Joule
+D. Watt
+B
+What is the law of conservation of energy?
+A. Energy can be created but not destroyed
+B. Energy can be destroyed but not created
+C. Energy cannot be created or destroyed, only transferred
+D. Energy is constant in a closed system
+C
+What is the SI unit of pressure?
+A. Pascal
+B. Newton
+C. Joule
+D. Watt
+A
+What is the process by which a liquid changes into a gas at its boiling point?
+A. Condensation
+B. Evaporation
+C. Sublimation
+D. Vaporization
+D
+What type of electromagnetic waves are used for communication in most wireless devices?
+A. Infrared
+B. Ultraviolet
+C. Radio waves
+D. X-rays
+C
+What is the law of reflection in optics?
+A. Light bends away from the normal
+B. Light bends towards the normal
+C. The angle of incidence is equal to the angle of refraction
+D. The angle of incidence is equal to the angle of reflection
+D
+What is the term for the resistance of an object to a change in its state of motion?
+A. Inertia
+B. Friction
+C. Gravity
+D. Acceleration
+A
+What is the SI unit of electrical resistance?
+A. Volt
+B. Ampere
+C. Ohm
+D. Joule
+C
+What is the phenomenon where a wave appears to bend as it passes around an obstacle or through an opening?
+A. Refraction
+B. Diffraction
+C. Reflection
+D. Interference
+B
+What is the force that opposes the motion of objects moving through a fluid (liquid or gas)?
+A. Inertia
+B. Gravity
+C. Tension
+D. Drag
+D
+According to the first law of thermodynamics, what is another name for the total energy in a closed system?
+A. Internal energy
+B. Potential energy
+C. Kinetic energy
+D. Thermal energy
+A
+What is the formula for calculating work (W) done by a force when an object is moved a certain distance (d) in the direction of the force?
+A. W = F × d
+B. W = F / d
+C. W = F + d
+D. W = F - d
+A
+What is the principle that states that the total electric charge in a closed system is constant?
+A. Ampere's Law
+B. Gauss's Law
+C. Coulomb's Law
+D. Conservation of Charge
+D
+What is the phenomenon where an object submerged in a fluid experiences an upward buoyant force equal to the weight of the fluid displaced by the object?
+A. Archimedes' principle
+B. Bernoulli's principle
+C. Pascal's principle
+D. Boyle's law
+A
+What is the fundamental particle that makes up all matter and has a positive electric charge?
+A. Electron
+B. Neutron
+C. Proton
+D. Photon
+C
+What is the term for the resistance of a fluid to flow, often measured in poise (Pa·s)?
+A. Density
+B. Viscosity
+C. Conductivity
+D. Elasticity
+B
+What is the unit of measurement for electric potential difference (voltage)?
+A. Ampere
+B. Volt
+C. Ohm
+D. Watt
+B
+What is the law that states that the total energy of an isolated system remains constant over time?
+A. Newton's first law
+B. Kepler's third law
+C. The first law of thermodynamics (law of energy conservation)
+D. Boyle's law
+C
+What is the term for the process by which an atom loses or gains electrons, resulting in a charged particle?
+A. Fusion
+B. Fission
+C. Ionization
+D. Radiation
+C
+What is the unit of measurement for power?
+A. Watt
+B. Joule
+C. Volt
+D. Ampere
+A
+What is the formula for calculating the force of gravity (F) between two objects with masses (m1 and m2) that are separated by a distance (r)?
+A. F = G × m1 × m2 / r^2
+B. F = G × m1 × m2 / r
+C. F = G × m1 + m2 / r
+D. F = G × m1 - m2 / r
+A
+What is the SI unit of work and energy?
+A. Joule
+B. Watt
+C. Newton
+D. Volt
+A
+According to the second law of thermodynamics, what is the direction of heat flow between objects of different temperatures?
+A. Heat flows from colder to hotter objects
+B. Heat flows from hotter to colder objects
+C. Heat does not flow between objects of different temperatures
+D. Heat flows in random directions
+B
+What is the term for the bending of light as it passes from one medium into another with a different optical density?
+A. Reflection
+B. Refraction
+C. Dispersion
+D. Polarization
+B
+What is the term for the scientific principle that states an object at rest tends to stay at rest, and an object in motion tends to stay in motion unless acted upon by an external force?
+A. Newton's first law of motion
+B. Newton's second law of motion
+C. Newton's third law of motion
+D. Newton's law of universal gravitation
+A

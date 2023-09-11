@@ -8,26 +8,27 @@ import com.project.quizdom.model.User;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 public class Server implements IServer {
     private static final int PORT = 9001;
-    private int maxNumUsers = 2;
+    private int maxNumUsers;
     private final Controller controller;
     private final String nickname;
     private final ArrayList<User> users;
-    private ServerListener serverListener;
+    private final ServerListener serverListener;
     private final ArrayList<ObjectOutputStream> writers;
 
     public Server(Controller controller, String nickname, int usersRequired) throws IOException {
         this.controller = controller;
         this.nickname = nickname;
         this.maxNumUsers = usersRequired;
-        this.users = new ArrayList<User>();
+        this.users = new ArrayList<>();
         User user = new User(nickname);
         user.setReady(true);
         this.users.add(user);
-        this.writers = new ArrayList<ObjectOutputStream>();
+        this.writers = new ArrayList<>();
         this.writers.add(null);
         this.serverListener = new ServerListener(PORT);
         this.serverListener.start();
@@ -52,7 +53,6 @@ public class Server implements IServer {
             message.setNickname(this.users.get(i).getNickname());
             this.writers.get(i).writeObject(message);
         }
-        serverListener = new ServerListener(9001);
         serverListener.closeSocket();
     }
 
@@ -93,7 +93,7 @@ public class Server implements IServer {
     }
 
     private String getUserList() {
-        StringBuilder list = new StringBuilder("");
+        StringBuilder list = new StringBuilder();
         for (int i = 0; i < this.users.size(); i++) {
             User user = this.users.get(i);
             list.append(user.getNickname()).append(",").append(user.isReady());
@@ -115,6 +115,8 @@ public class Server implements IServer {
                 while (true) {
                     new Handler(this.listener.accept()).start();
                 }
+            } catch (SocketException e) {
+                System.out.println("Server (" + this.getId() + "): " + e.getMessage());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -124,7 +126,6 @@ public class Server implements IServer {
                     throw new RuntimeException(e);
                 }
             }
-
         }
 
         public void closeSocket() throws IOException {
@@ -153,9 +154,6 @@ public class Server implements IServer {
                             case CONNECT: {
                                 Message mReply = new Message();
                                 if (users.size() == maxNumUsers) {
-                                    mReply.setMsgType(MessageType.CONNECT_FAILED);
-                                    mReply.setNickname("");
-                                } else if (!controller.isRoomOpen()) {
                                     mReply.setMsgType(MessageType.CONNECT_FAILED);
                                     mReply.setNickname("");
                                 } else {
@@ -196,6 +194,7 @@ public class Server implements IServer {
                             }
                             case QUIZ: {
                                 controller.setScore(incomingMsg.getContent());
+                                controller.setClientNickname(incomingMsg.getNickname());
                                 break;
                             }
                             case DISCONNECT: {

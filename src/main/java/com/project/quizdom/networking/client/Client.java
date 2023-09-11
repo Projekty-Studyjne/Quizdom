@@ -64,7 +64,7 @@ public class Client implements IClient {
     }
 
     private List<User> extractUserList(String s) {
-        List<User> list = new ArrayList<User>();
+        List<User> list = new ArrayList<>();
         String[] temp = s.split(";");
         for (int i = 0; i < temp.length; i++) {
             String[] nickReady = temp[i].split(",");
@@ -128,6 +128,7 @@ public class Client implements IClient {
                             }
                             case QUIZ: {
                                 controller.setScore(incomingMessage.getContent());
+                                controller.setServerNickname(incomingMessage.getNickname());
                                 break;
                             }
                             case END:{

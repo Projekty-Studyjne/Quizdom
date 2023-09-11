@@ -49,6 +49,8 @@ public class Controller {
     @FXML
     private VBox vboxScore;
     @FXML
+    private VBox vboxBack;
+    @FXML
     private VBox vboxCategory;
     @FXML
     private VBox vboxConnecting;
@@ -61,13 +63,21 @@ public class Controller {
     @FXML
     private Button btnD;
     @FXML
-    private Button btnCategory1;
+    private Button btnCategoryMath;
     @FXML
-    private Button btnCategory2;
+    private Button btnCategoryGeneralKnowledge;
     @FXML
-    private Button btnCategory3;
+    private Button btnCategoryPhysics;
     @FXML
-    private Button btnCategory4;
+    private Button btnCategoryBiology;
+    @FXML
+    private Button btnCategoryHistory;
+    @FXML
+    private Button btnCategoryGeography;
+    @FXML
+    private Button btnCategoryReligion;
+    @FXML
+    private Button btnCategoryMusic;
     @FXML
     private Button btnReady;
     @FXML
@@ -100,7 +110,9 @@ public class Controller {
     private ArrayList<Label> listNicknameServer;
     private ArrayList<Label> listReadyServer;
     private ArrayList<String> randomCategory;
-    private static String category = "";
+    private static int j = 1;
+    private String clientNickname;
+    private String serverNickname;
 
     public Controller() {
     }
@@ -110,6 +122,7 @@ public class Controller {
         randomCategory = new ArrayList<>();
 
         this.vboxPlay.setVisible(true);
+        this.vboxBack.setVisible(true);
         this.vboxQuiz.setVisible(false);
         this.vboxCategory.setVisible(false);
         this.vboxScore.setVisible(false);
@@ -119,10 +132,10 @@ public class Controller {
         this.vboxCreateRoom.setVisible(false);
         this.vboxConnecting.setVisible(false);
 
-        this.listNicknameClient = new ArrayList<Label>();
-        this.listReadyClient = new ArrayList<Label>();
-        this.listNicknameServer = new ArrayList<Label>();
-        this.listReadyServer = new ArrayList<Label>();
+        this.listNicknameClient = new ArrayList<>();
+        this.listReadyClient = new ArrayList<>();
+        this.listNicknameServer = new ArrayList<>();
+        this.listReadyServer = new ArrayList<>();
 
         for (int i = 0; i < ROOM_CAPACITY; i++) {
 
@@ -178,17 +191,25 @@ public class Controller {
     }
 
     private void disableCategory() {
-        btnCategory1.setDisable(true);
-        btnCategory2.setDisable(true);
-        btnCategory3.setDisable(true);
-        btnCategory4.setDisable(true);
+        btnCategoryMath.setDisable(true);
+        btnCategoryGeneralKnowledge.setDisable(true);
+        btnCategoryPhysics.setDisable(true);
+        btnCategoryBiology.setDisable(true);
+        btnCategoryHistory.setDisable(true);
+        btnCategoryGeography.setDisable(true);
+        btnCategoryReligion.setDisable(true);
+        btnCategoryMusic.setDisable(true);
     }
 
     private void turOnCategory() {
-        btnCategory1.setDisable(false);
-        btnCategory2.setDisable(false);
-        btnCategory3.setDisable(false);
-        btnCategory4.setDisable(false);
+        btnCategoryMath.setDisable(false);
+        btnCategoryGeneralKnowledge.setDisable(false);
+        btnCategoryPhysics.setDisable(false);
+        btnCategoryBiology.setDisable(false);
+        btnCategoryHistory.setDisable(false);
+        btnCategoryGeography.setDisable(false);
+        btnCategoryReligion.setDisable(false);
+        btnCategoryMusic.setDisable(false);
     }
 
     private void turnOnAll() {
@@ -207,11 +228,11 @@ public class Controller {
             @Override
             public void run() {
                 if (countdown > 0) {
-                    Platform.runLater(() -> lblTimer.setText(String.valueOf(countdown)));
+                    Platform.runLater(() -> lblTimer.setText("Timer: " + countdown));
                     countdown--;
                 } else {
                     if (initialCountdown > 0) {
-                        Platform.runLater(() -> lblTimer.setText(String.valueOf(initialCountdown)));
+                        Platform.runLater(() -> lblTimer.setText("Next question: " + initialCountdown));
                         initialCountdown--;
                         disableAll();
                         isCorrect();
@@ -231,11 +252,12 @@ public class Controller {
     }
 
     private void nextQuestion() throws IOException {
+        turOnCategory();
         turnOnAll();
         countdown = 10;
         if (questions != null && i < questions.size()) {
             Platform.runLater(() -> {
-                lblQuestion.setText(questions.get(i++));
+                lblQuestion.setText((j++) + ". " + questions.get(i++));
                 btnA.setText(questions.get(i++));
                 btnB.setText(questions.get(i++));
                 btnC.setText(questions.get(i++));
@@ -376,27 +398,84 @@ public class Controller {
     }
 
     @FXML
-    void onCategory1Clicked() throws IOException {
+    void onCategoryMathClicked() throws IOException {
         addCategory("Math");
         disableCategory();
     }
 
     @FXML
-    void onCategory2Clicked() throws IOException {
-        addCategory("General");
+    void onCategoryGeneralKnowledgeClicked() throws IOException {
+        addCategory("GeneralKnowledge");
         disableCategory();
     }
 
     @FXML
-    void onCategory3Clicked() throws IOException {
+    void onCategoryPhysicsClicked() throws IOException {
         addCategory("Physics");
         disableCategory();
     }
 
     @FXML
-    void onCategory4Clicked() throws IOException {
+    void onCategoryBiologyClicked() throws IOException {
         addCategory("Biology");
         disableCategory();
+    }
+
+    @FXML
+    void onCategoryHistoryClicked() throws IOException {
+        addCategory("History");
+        disableCategory();
+    }
+
+    @FXML
+    void onCategoryGeographyClicked() throws IOException {
+        addCategory("Geography");
+        disableCategory();
+    }
+
+    @FXML
+    void onCategoryReligionClicked() throws IOException {
+        addCategory("Religion");
+        disableCategory();
+    }
+
+    @FXML
+    void onCategoryMusicClicked() throws IOException {
+        addCategory("Music");
+        disableCategory();
+    }
+
+    @FXML
+    void onBackClicked() throws IOException {
+        switch (this.state) {
+            case MP_CREATE: {
+                this.vboxCreateRoom.setVisible(false);
+                this.vboxPlay.setVisible(true);
+                this.state = State.MULTIPLAYER;
+                break;
+            }
+            case MP_JOIN: {
+                this.vboxJoinRoom.setVisible(false);
+                this.vboxPlay.setVisible(true);
+                this.state = State.MULTIPLAYER;
+                break;
+            }
+            case MP_SERVER: {
+                this.closeConnection();
+                this.vboxServerLobby.setVisible(false);
+                this.vboxPlay.setVisible(true);
+                this.state = State.MULTIPLAYER;
+                break;
+            }
+            case MP_CLIENT: {
+                this.closeConnection();
+                this.vboxClientLobby.setVisible(false);
+                this.vboxPlay.setVisible(true);
+                this.state = State.MULTIPLAYER;
+                break;
+            }
+        }
+
     }
 
     public void checkAnswer(String answer) throws IOException {
@@ -435,35 +514,59 @@ public class Controller {
         this.vboxScore.setVisible(true);
         this.vboxQuiz.setVisible(false);
         if (this.state == State.MP_CLIENT) {
-            this.lblScore.setText(clientScore + "---" + serverScore);
+            this.lblScore.setText(clientNickname + ": " + clientScore + "---" + serverScore + ": " + serverNickname);
         } else if (this.state == State.MP_SERVER) {
-            this.lblScore.setText(serverScore + "---" + clientScore);
+            this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + ": " + clientScore);
         }
+    }
+
+    public void setClientNickname(String nickname) {
+        clientNickname = nickname;
+    }
+
+    public void setServerNickname(String nickname) {
+        serverNickname = nickname;
     }
 
     public void setCategory(String category) throws IOException {
         switch (category) {
             case "Math": {
-                setQuestions("src/main/java/com/project/quizdom/game/file/matematyka.txt");
+                setQuestions("src/main/java/com/project/quizdom/game/file/Math.txt");
                 break;
             }
-            case "General": {
-                setQuestions("src/main/java/com/project/quizdom/game/file/ogolna.txt");
+            case "GeneralKnowledge": {
+                setQuestions("src/main/java/com/project/quizdom/game/file/GeneralKnowledge.txt");
                 break;
             }
             case "Physics": {
-                setQuestions("src/main/java/com/project/quizdom/game/file/fizyka.txt");
+                setQuestions("src/main/java/com/project/quizdom/game/file/Physics.txt");
                 break;
             }
             case "Biology": {
-                setQuestions("src/main/java/com/project/quizdom/game/file/biologia.txt");
+                setQuestions("src/main/java/com/project/quizdom/game/file/Biology.txt");
+                break;
+            }
+            case "History": {
+                setQuestions("src/main/java/com/project/quizdom/game/file/History.txt");
+                break;
+            }
+            case "Geography": {
+                setQuestions("src/main/java/com/project/quizdom/game/file/Geography.txt");
+                break;
+            }
+            case "Religion": {
+                setQuestions("src/main/java/com/project/quizdom/game/file/Religion.txt");
+                break;
+            }
+            case "Music": {
+                setQuestions("src/main/java/com/project/quizdom/game/file/Music.txt");
                 break;
             }
         }
     }
 
     public void startCategory() throws IOException {
-        category = drawCategory();
+        String category = drawCategory();
         setCategory(category);
         server.sendCategory(category);
         switchToQuiz();
@@ -551,8 +654,10 @@ public class Controller {
     public void startGame() throws IOException {
         if (this.state == State.MP_CLIENT) {
             vboxClientLobby.setVisible(false);
+            vboxBack.setVisible(false);
             vboxCategory.setVisible(true);
         } else if (this.state == State.MP_SERVER) {
+            vboxServerLobby.setVisible(false);
             vboxServerLobby.setVisible(false);
             vboxCategory.setVisible(true);
         }
@@ -640,9 +745,5 @@ public class Controller {
 
     public void showConnectingBox(boolean value) {
         this.vboxConnecting.setVisible(value);
-    }
-
-    public boolean isRoomOpen() {
-        return true;
     }
 }

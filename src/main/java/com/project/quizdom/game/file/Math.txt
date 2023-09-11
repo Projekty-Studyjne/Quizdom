@@ -1,0 +1,180 @@
+What is the result of 7 x 8?
+A. 14
+B. 49
+C. 56
+D. 64
+C
+What is the square root of 25?
+A. 5
+B. 10
+C. 15
+D. 25
+A
+What is the area of a rectangle with a length of 6 units and a width of 4 units?
+A. 8 square units
+B. 16 square units
+C. 20 square units
+D. 24 square units
+B
+What is the value of π (pi) to three decimal places?
+A. 3.142
+B. 3.141
+C. 3.140
+D. 3.139
+B
+If x = 3 and y = 5, what is the value of 2x + 3y?
+A. 11
+B. 13
+C. 16
+D. 18
+D
+What is the perimeter of a square with a side length of 9 inches?
+A. 18 inches
+B. 27 inches
+C. 36 inches
+D. 81 inches
+C
+If a triangle has angles measuring 30 degrees, 60 degrees, and 90 degrees, what type of triangle is it?
+A. Equilateral
+B. Isosceles
+C. Scalene
+D. Right
+D
+What is the value of 7 squared (7^2)?
+A. 14
+B. 21
+C. 49
+D. 64
+C
+If a box contains 12 marbles, and 3 of them are red, what is the probability of randomly selecting a red marble?
+A. 1/2
+B. 1/3
+C. 1/4
+D. 1/12
+B
+What is the sum of the angles in a triangle?
+A. 90 degrees
+B. 120 degrees
+C. 180 degrees
+D. 360 degrees
+C
+If a car travels at a speed of 60 miles per hour for 3 hours, how far does it travel?
+A. 120 miles
+B. 160 miles
+C. 180 miles
+D. 200 miles
+D
+What is the value of 5! (5 factorial)?
+A. 5
+B. 10
+C. 20
+D. 120
+D
+If a pizza is divided into 8 equal slices, and 3 slices are eaten, how many slices are left?
+A. 2
+B. 3
+C. 5
+D. 8
+C
+What is the least common multiple (LCM) of 6 and 8?
+A. 12
+B. 16
+C. 24
+D. 48
+C
+If the square root of x is 4, what is the value of x?
+A. 2
+B. 4
+C. 8
+D. 16
+D
+What is the circumference of a circle with a radius of 5 inches? (Use π = 3.141)
+A. 10π inches
+B. 15π inches
+C. 25π inches
+D. 30π inches
+C
+If a right triangle has a hypotenuse of 10 units and one leg of 6 units, what is the length of the other leg?
+A. 4 units
+B. 6 units
+C. 8 units
+D. 10 units
+A
+What is the product of 9 and 7?
+A. 14
+B. 63
+C. 72
+D. 81
+B
+If a store sells a shirt for $25 and offers a 20% discount, what is the discounted price of the shirt?
+A. $5
+B. $15
+C. $20
+D. $25
+C
+What is the value of 2 to the power of 4 (2^4)?
+A. 4
+B. 8
+C. 16
+D. 32
+C
+If a train travels at a speed of 50 miles per hour for 2 hours, how far does it travel?
+A. 50 miles
+B. 100 miles
+C. 150 miles
+D. 200 miles
+B
+What is the difference between 15 and 8?
+A. 5
+B. 7
+C. 8
+D. 15
+B
+If a rectangle has a length of 10 units and a width of 6 units, what is its area?
+A. 12 square units
+B. 30 square units
+C. 36 square units
+D. 60 square units
+D
+What is the value of 3 cubed (3^3)?
+A. 6
+B. 9
+C. 18
+D. 27
+D
+If the sum of two numbers is 15, and one of the numbers is 8, what is the other number?
+A. 7
+B. 8
+C. 15
+D. 23
+A
+What is the decimal equivalent of the fraction 3/4?
+A. 0.25
+B. 0.50
+C. 0.75
+D. 1.00
+C
+If a rectangle has a perimeter of 28 units and a width of 6 units, what is its length?
+A. 4 units
+B. 7 units
+C. 8 units
+D. 10 units
+B
+What is the value of 5 divided by 1/5?
+A. 1
+B. 5
+C. 10
+D. 25
+D
+If a clock reads 3:45, what is the angle between the hour and minute hands of the clock?
+A. 45 degrees
+B. 90 degrees
+C. 120 degrees
+D. 135 degrees
+C
+What is the value of 7 squared (7^2)?
+A. 14
+B. 21
+C. 49
+D. 64
+C
