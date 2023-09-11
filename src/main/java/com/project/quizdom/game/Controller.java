@@ -413,13 +413,15 @@ public class Controller {
             server.sendScore(serverScore);
         }
     }
-    public void setScore(String score){
+
+    public void setScore(String score) {
         if (this.state == State.MP_CLIENT) {
-            serverScore=Integer.parseInt(score);
+            serverScore = Integer.parseInt(score);
         } else if (this.state == State.MP_SERVER) {
-            clientScore=Integer.parseInt(score);
+            clientScore = Integer.parseInt(score);
         }
     }
+
     public void setEndingScore() throws IOException {
         if (this.state == State.MP_CLIENT) {
             client.sendEnding();
@@ -428,11 +430,17 @@ public class Controller {
             switchToEnding();
         }
     }
-    public void switchToEnding(){
+
+    public void switchToEnding() {
         this.vboxScore.setVisible(true);
         this.vboxQuiz.setVisible(false);
-        this.lblScore.setText(clientScore + "---" + serverScore);
+        if (this.state == State.MP_CLIENT) {
+            this.lblScore.setText(clientScore + "---" + serverScore);
+        } else if (this.state == State.MP_SERVER) {
+            this.lblScore.setText(serverScore + "---" + clientScore);
+        }
     }
+
     public void setCategory(String category) throws IOException {
         switch (category) {
             case "Math": {
