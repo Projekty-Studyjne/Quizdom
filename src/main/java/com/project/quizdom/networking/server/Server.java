@@ -72,12 +72,11 @@ public class Server implements IServer {
             message.setNickname(this.users.get(i).getNickname());
             this.writers.get(i).writeObject(message);
         }
-
     }
 
     @Override
-    public void startQuiz() throws IOException {
-        Message message = new Message(MessageType.QUIZ, this.nickname, "");
+    public void sendEnding() throws IOException {
+        Message message = new Message(MessageType.END, this.nickname, "");
         for (int i = 1; i < this.users.size(); i++) {
             message.setNickname(this.users.get(i).getNickname());
             this.writers.get(i).writeObject(message);
@@ -181,13 +180,13 @@ public class Server implements IServer {
                             }
                             case CATEGORY: {
                                 controller.addToCategory(incomingMsg.getContent());
-                                if(controller.getSizeCategory()==2){
-                                controller.startCategory();
+                                if (controller.getSizeCategory() == 2) {
+                                    controller.startCategory();
                                 }
                                 break;
                             }
                             case QUIZ: {
-
+                                controller.setScore(incomingMsg.getContent());
                                 break;
                             }
                             case DISCONNECT: {

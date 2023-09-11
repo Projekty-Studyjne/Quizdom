@@ -55,7 +55,12 @@ public class Client implements IClient {
     public void sendWrongAnswer(int score) throws IOException {
         Message message = new Message(MessageType.QUIZ, this.nickname, String.valueOf(score));
         this.sendMessage(message);
+    }
 
+    @Override
+    public void sendEnding() throws IOException {
+        Message message = new Message(MessageType.END, this.nickname, "");
+        this.sendMessage(message);
     }
 
     private List<User> extractUserList(String s) {
@@ -122,7 +127,10 @@ public class Client implements IClient {
                                 break;
                             }
                             case QUIZ: {
-
+                                break;
+                            }
+                            case END:{
+                                controller.switchToEnding();
                                 break;
                             }
                             case DISCONNECT: {

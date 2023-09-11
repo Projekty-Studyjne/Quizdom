@@ -216,14 +216,20 @@ public class Controller {
                         disableAll();
                         isCorrect();
                     } else {
-                        Platform.runLater(() -> nextQuestion());
+                        Platform.runLater(() -> {
+                            try {
+                                nextQuestion();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
                     }
                 }
             }
         }, 0, 1000);
     }
 
-    private void nextQuestion() {
+    private void nextQuestion() throws IOException {
         turnOnAll();
         countdown = 10;
         initialCountdown = 2;
@@ -237,9 +243,7 @@ public class Controller {
                 currentAnswer = questions.get(i++);
             });
         } else {
-            this.vboxScore.setVisible(true);
-            this.vboxQuiz.setVisible(false);
-            this.lblScore.setText(String.valueOf(clientScore + "---" + serverScore));
+            setEndingScore();
         }
     }
 
@@ -408,7 +412,22 @@ public class Controller {
             }
         }
     }
-
+    public void setScore(String score){
+        clientScore=Integer.parseInt(score);
+    }
+    public void setEndingScore() throws IOException {
+        if (this.state == State.MP_CLIENT) {
+            client.sendEnding();
+        } else if (this.state == State.MP_SERVER) {
+            server.sendEnding();
+            switchToEnding();
+        }
+    }
+    public void switchToEnding(){
+        this.vboxScore.setVisible(true);
+        this.vboxQuiz.setVisible(false);
+        this.lblScore.setText(String.valueOf(clientScore + "---" + serverScore));
+    }
     public void setCategory(String category) throws IOException {
         switch (category) {
             case "Math": {
@@ -452,7 +471,7 @@ public class Controller {
         randomCategory.add(category);
     }
 
-    void setQuestions(String category) throws FileNotFoundException {
+    void setQuestions(String category) throws IOException {
         startTimer();
         Quiz quiz = new Quiz();
         questions = quiz.getQuestions(category);
