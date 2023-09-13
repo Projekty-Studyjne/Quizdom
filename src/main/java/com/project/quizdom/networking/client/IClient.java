@@ -11,4 +11,6 @@ public interface IClient {
     public void sendCorrectAnswer(int score) throws IOException;
     public void sendWrongAnswer(int score) throws IOException;
     public void sendEnding() throws IOException;
+
+    void sendPlayAgain() throws IOException;
 }

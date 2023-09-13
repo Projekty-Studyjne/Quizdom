@@ -62,6 +62,11 @@ public class Client implements IClient {
         Message message = new Message(MessageType.END, this.nickname, "");
         this.sendMessage(message);
     }
+    @Override
+    public void sendPlayAgain() throws IOException {
+        Message message = new Message(MessageType.PLAY_AGAIN, this.nickname, "");
+        this.sendMessage(message);
+    }
 
     private List<User> extractUserList(String s) {
         List<User> list = new ArrayList<>();
@@ -119,6 +124,10 @@ public class Client implements IClient {
                             }
                             case START_GAME: {
                                 controller.startGame();
+                                break;
+                            }
+                            case QUESTIONS:{
+                                controller.setDrawQuestions(Integer.valueOf(incomingMessage.getContent()));
                                 break;
                             }
                             case CATEGORY: {

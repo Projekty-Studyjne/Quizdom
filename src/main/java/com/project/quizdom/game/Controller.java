@@ -17,13 +17,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Controller {
     @FXML
@@ -33,7 +33,15 @@ public class Controller {
     @FXML
     private Text lblTimer;
     @FXML
+    private Text lblErrorNicknameClient;
+    @FXML
+    private Text lblErrorIP;
+    @FXML
+    private Text lblErrorNicknameServer;
+    @FXML
     private Text lblIPAddressServer;
+    @FXML
+    private Text lblResult;
     @FXML
     private VBox vboxServerLobby;
     @FXML
@@ -83,6 +91,12 @@ public class Controller {
     @FXML
     private Button btnStartGame;
     @FXML
+    private Button btnJoinRoom;
+    @FXML
+    private Button btnCreateRoom;
+    @FXML
+    private Button btnPlayAgain;
+    @FXML
     private ListView<HBox> lstClientUsers;
     @FXML
     private ListView<HBox> lstServerUsers;
@@ -110,9 +124,13 @@ public class Controller {
     private ArrayList<Label> listNicknameServer;
     private ArrayList<Label> listReadyServer;
     private ArrayList<String> randomCategory;
+    private static List<Integer> randomQuestions;
     private static int j = 1;
+    private static int ready = 0;
     private String clientNickname;
     private String serverNickname;
+    private static final Pattern PATTERN_NICKNAME = Pattern.compile("^[a-zA-Z0-9]{3,15}$");
+    private static final Pattern PATTERN_IP = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
     public Controller() {
     }
@@ -180,6 +198,14 @@ public class Controller {
 
         }
         connectedUsers = 0;
+    }
+
+    private boolean checkNickname(String text) {
+        return PATTERN_NICKNAME.matcher(text).matches();
+    }
+
+    private boolean checkIP(String text) {
+        return PATTERN_IP.matcher(text).matches();
     }
 
     private void disableAll() {
@@ -312,6 +338,15 @@ public class Controller {
             category = randomCategory.get(randomValue);
         }
         return category;
+    }
+
+    private static List<Integer> drawQuestions() {
+        List<Integer> draw = new ArrayList<>();
+        for (int i = 0; i <= 149; i += 5) {
+            draw.add(i);
+        }
+        Collections.shuffle(draw);
+        return draw.subList(0, 5);
     }
 
 
@@ -475,7 +510,74 @@ public class Controller {
                 break;
             }
         }
+    }
 
+    @FXML
+    public void validateNicknameAddressClient() {
+        if (this.checkNickname(this.txtNicknameJoin.getText()) && (this.checkIP(this.txtIPAddress.getText()) || this.txtIPAddress.getText().isEmpty())) {
+            this.btnJoinRoom.setDisable(false);
+            this.lblErrorNicknameClient.setVisible(false);
+            this.lblErrorIP.setVisible(false);
+            this.txtNicknameJoin.setStyle("-fx-border-width: 0px; -fx-focus-color: #039ED3;");
+            this.txtIPAddress.setStyle("-fx-border-width: 0px; -fx-focus-color: #039ED3;");
+        } else if (this.checkNickname(this.txtNicknameJoin.getText()) && !(checkIP(this.txtIPAddress.getText()) || this.txtIPAddress.getText().isEmpty())) {
+            this.btnJoinRoom.setDisable(true);
+            this.lblErrorNicknameClient.setVisible(false);
+            this.lblErrorIP.setVisible(true);
+            this.txtNicknameJoin.setStyle("-fx-border-width: 0px; -fx-focus-color: #039ED3;");
+            this.txtIPAddress.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+        } else if (!this.checkNickname(this.txtNicknameJoin.getText()) && (checkIP(this.txtIPAddress.getText()) || this.txtIPAddress.getText().isEmpty())) {
+            this.btnJoinRoom.setDisable(true);
+            this.lblErrorNicknameClient.setVisible(true);
+            this.lblErrorIP.setVisible(false);
+            this.txtNicknameJoin.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+            this.txtIPAddress.setStyle("-fx-border-width: 0px; -fx-focus-color: #039ED3;");
+        } else {
+            this.btnJoinRoom.setDisable(true);
+            this.lblErrorNicknameClient.setVisible(true);
+            this.lblErrorIP.setVisible(true);
+            this.txtNicknameJoin.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+            this.txtIPAddress.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+        }
+    }
+
+    @FXML
+    public void validateNicknameServer() {
+        if (this.checkNickname(this.txtNicknameCreate.getText())) {
+            this.btnCreateRoom.setDisable(false);
+            this.lblErrorNicknameServer.setVisible(false);
+            this.txtNicknameCreate.setStyle("-fx-border-width: 0px; -fx-focus-color: #039ED3;");
+        } else {
+            this.btnCreateRoom.setDisable(true);
+            this.lblErrorNicknameServer.setVisible(true);
+            this.txtNicknameCreate.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+        }
+    }
+
+    @FXML
+    public void onPlayAgainClicked() throws IOException {
+        btnPlayAgain.setDisable(true);
+        playAgain();
+    }
+
+    public void playAgain() throws IOException {
+        if (this.state == State.MP_CLIENT) {
+            client.sendPlayAgain();
+        } else if (this.state == State.MP_SERVER) {
+            playAgainReady();
+            if (getReady() == 2) {
+                server.sendStartGame();
+                startGame();
+            }
+        }
+    }
+
+    public void playAgainReady() {
+        ready++;
+    }
+
+    public int getReady() {
+        return ready;
     }
 
     public void checkAnswer(String answer) throws IOException {
@@ -515,8 +617,22 @@ public class Controller {
         this.vboxQuiz.setVisible(false);
         if (this.state == State.MP_CLIENT) {
             this.lblScore.setText(clientNickname + ": " + clientScore + "---" + serverScore + ": " + serverNickname);
+            if (clientScore > serverScore) {
+                lblResult.setText("YOU WIN!!!");
+            } else if (clientScore < serverScore) {
+                lblResult.setText("SKILL ISSUE :(");
+            } else {
+                lblResult.setText("DRAW");
+            }
         } else if (this.state == State.MP_SERVER) {
             this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + ": " + clientScore);
+            if (clientScore > serverScore) {
+                lblResult.setText("SKILL ISSUE :(");
+            } else if (clientScore < serverScore) {
+                lblResult.setText("YOU WIN!!!");
+            } else {
+                lblResult.setText("DRAW");
+            }
         }
     }
 
@@ -565,10 +681,19 @@ public class Controller {
         }
     }
 
+    public void setDrawQuestions(Integer questions) {
+        randomQuestions.add(questions);
+    }
+
+
     public void startCategory() throws IOException {
         String category = drawCategory();
+        randomQuestions = drawQuestions();
         setCategory(category);
         server.sendCategory(category);
+        for (Integer randomQuestion : randomQuestions) {
+            server.sendQuestion(String.valueOf(randomQuestion));
+        }
         switchToQuiz();
     }
 
@@ -590,7 +715,12 @@ public class Controller {
     void setQuestions(String category) throws IOException {
         startTimer();
         Quiz quiz = new Quiz();
-        questions = quiz.getQuestions(category);
+        List<String> tempQuestions = quiz.getQuestions(category);
+        for (Integer randomQuestion : randomQuestions) {
+            for (int j = randomQuestion; j < randomQuestion + 5; j++) {
+                questions.add(tempQuestions.get(j));
+            }
+        }
         nextQuestion();
     }
 

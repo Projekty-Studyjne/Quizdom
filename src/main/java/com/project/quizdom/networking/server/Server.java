@@ -75,6 +75,15 @@ public class Server implements IServer {
     }
 
     @Override
+    public void sendQuestion(String question) throws IOException {
+        Message message = new Message(MessageType.QUESTIONS, this.nickname, question);
+        for (int i = 1; i < this.users.size(); i++) {
+            message.setNickname(this.users.get(i).getNickname());
+            this.writers.get(i).writeObject(message);
+        }
+    }
+
+    @Override
     public void sendScore(int score) throws IOException {
         Message message = new Message(MessageType.QUIZ, this.nickname, String.valueOf(score));
         for (int i = 1; i < this.users.size(); i++) {
@@ -196,6 +205,12 @@ public class Server implements IServer {
                                 controller.setScore(incomingMsg.getContent());
                                 controller.setClientNickname(incomingMsg.getNickname());
                                 break;
+                            }
+                            case PLAY_AGAIN: {
+                                controller.playAgainReady();
+                                if (controller.getReady() == 2) {
+                                    controller.startGame();
+                                }
                             }
                             case DISCONNECT: {
                                 controller.removeUser(incomingMsg.getNickname());
