@@ -149,6 +149,10 @@ public class Controller {
         this.vboxJoinRoom.setVisible(false);
         this.vboxCreateRoom.setVisible(false);
         this.vboxConnecting.setVisible(false);
+        this.lblErrorIP.setVisible(false);
+        this.lblErrorNicknameClient.setVisible(false);
+        this.lblErrorNicknameServer.setVisible(false);
+
 
         this.listNicknameClient = new ArrayList<>();
         this.listReadyClient = new ArrayList<>();
@@ -715,6 +719,7 @@ public class Controller {
     void setQuestions(String category) throws IOException {
         startTimer();
         Quiz quiz = new Quiz();
+        questions = new ArrayList<>();
         List<String> tempQuestions = quiz.getQuestions(category);
         for (Integer randomQuestion : randomQuestions) {
             for (int j = randomQuestion; j < randomQuestion + 5; j++) {
