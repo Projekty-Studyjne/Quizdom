@@ -346,7 +346,7 @@ public class Controller {
 
     private static List<Integer> drawQuestions() {
         List<Integer> draw = new ArrayList<>();
-        for (int i = 0; i <= 149; i += 5) {
+        for (int i = 0; i <= 129; i += 6) {
             draw.add(i);
         }
         Collections.shuffle(draw);
