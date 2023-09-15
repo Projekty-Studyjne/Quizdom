@@ -4,9 +4,12 @@ import com.project.quizdom.game.Controller;
 import com.project.quizdom.model.Message;
 import com.project.quizdom.model.MessageType;
 import com.project.quizdom.model.User;
+import javafx.scene.control.Alert;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +65,7 @@ public class Client implements IClient {
         Message message = new Message(MessageType.END, this.nickname, "");
         this.sendMessage(message);
     }
+
     @Override
     public void sendPlayAgain() throws IOException {
         Message message = new Message(MessageType.PLAY_AGAIN, this.nickname, "");
@@ -116,6 +120,7 @@ public class Client implements IClient {
                             }
                             case USER_JOINED: {
                                 controller.addUser(new User(incomingMessage.getNickname()));
+                                controller.setServerNickname(incomingMessage.getNickname());
                                 break;
                             }
                             case READY: {
@@ -126,7 +131,7 @@ public class Client implements IClient {
                                 controller.startGame();
                                 break;
                             }
-                            case QUESTIONS:{
+                            case QUESTIONS: {
                                 controller.setDrawQuestions(Integer.valueOf(incomingMessage.getContent()));
                                 break;
                             }
@@ -139,7 +144,7 @@ public class Client implements IClient {
                                 controller.setScore(incomingMessage.getContent());
                                 break;
                             }
-                            case END:{
+                            case END: {
                                 controller.switchToEnding();
                                 break;
                             }
@@ -154,8 +159,17 @@ public class Client implements IClient {
                         }
                     }
                 }
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (SocketException e) {
+                System.out.println("Socket exception");
+                if (e instanceof ConnectException) {
+                    controller.showConnectingBox(false);
+                } else if (e.getMessage().equals("Connection reset")) {
+                    System.out.println("Stream closed");
+                } else e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("Stream closed");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
 
         }

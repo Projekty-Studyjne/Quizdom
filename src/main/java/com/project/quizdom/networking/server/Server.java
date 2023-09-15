@@ -4,8 +4,10 @@ import com.project.quizdom.game.Controller;
 import com.project.quizdom.model.Message;
 import com.project.quizdom.model.MessageType;
 import com.project.quizdom.model.User;
+import javafx.scene.control.Alert;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -175,6 +177,7 @@ public class Server implements IServer {
                                     mReply.setMsgType(MessageType.CONNECT_OK);
                                     mReply.setNickname(nickname);
                                     mReply.setContent(getUserList());
+                                    controller.setClientNickname(incomingMsg.getNickname());
                                 }
                                 output.writeObject(mReply);
                                 break;
@@ -227,8 +230,17 @@ public class Server implements IServer {
                         }
                     }
                 }
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (SocketException e) {
+                if (e.getMessage().contains("Connection reset"))
+                    System.out.println("Stream closed");
+                else if (e.getMessage().contains("Socket closed"))
+                    System.out.println("Socket closed");
+                else e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("Errore stream (" + this.getId() + ")");
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }
