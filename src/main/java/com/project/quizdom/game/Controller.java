@@ -137,6 +137,7 @@ public class Controller {
 
     public void initialize() {
         this.state = State.MULTIPLAYER;
+        randomQuestions = new ArrayList<>();
         randomCategory = new ArrayList<>();
 
         this.vboxPlay.setVisible(true);
