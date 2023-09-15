@@ -722,7 +722,7 @@ public class Controller {
         questions = new ArrayList<>();
         List<String> tempQuestions = quiz.getQuestions(category);
         for (Integer randomQuestion : randomQuestions) {
-            for (int j = randomQuestion; j < randomQuestion + 5; j++) {
+            for (int j = randomQuestion; j <= randomQuestion + 5; j++) {
                 questions.add(tempQuestions.get(j));
             }
         }
