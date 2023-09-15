@@ -621,7 +621,7 @@ public class Controller {
         this.vboxScore.setVisible(true);
         this.vboxQuiz.setVisible(false);
         if (this.state == State.MP_CLIENT) {
-            this.lblScore.setText(clientNickname + ": " + clientScore + "---" + serverScore + ": " + serverNickname);
+            this.lblScore.setText(clientNickname + ": " + clientScore + "---" + serverScore + " :" + serverNickname);
             if (clientScore > serverScore) {
                 lblResult.setText("YOU WIN!!!");
             } else if (clientScore < serverScore) {
@@ -630,7 +630,7 @@ public class Controller {
                 lblResult.setText("DRAW");
             }
         } else if (this.state == State.MP_SERVER) {
-            this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + ": " + clientNickname);
+            this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + " :" + clientNickname);
             if (clientScore > serverScore) {
                 lblResult.setText("SKILL ISSUE :(");
             } else if (clientScore < serverScore) {
@@ -823,12 +823,10 @@ public class Controller {
             if (this.state == State.MP_CLIENT) {
                 this.listNicknameClient.get(this.connectedUsers).setText(user.getNickname());
                 this.lstClientUsers.getItems().get(this.connectedUsers).setVisible(true);
-                clientNickname= user.getNickname();
                 this.connectedUsers++;
             } else if (this.state == State.MP_SERVER) {
                 this.listNicknameServer.get(this.connectedUsers).setText(user.getNickname());
                 this.lstServerUsers.getItems().get(this.connectedUsers).setVisible(true);
-                serverNickname= user.getNickname();
                 this.connectedUsers++;
                 this.btnStartGame.setDisable(true);
             }
