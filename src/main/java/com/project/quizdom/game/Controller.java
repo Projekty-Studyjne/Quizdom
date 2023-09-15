@@ -794,7 +794,7 @@ public class Controller {
             vboxCategory.setVisible(true);
         } else if (this.state == State.MP_SERVER) {
             vboxServerLobby.setVisible(false);
-            vboxServerLobby.setVisible(false);
+            vboxBack.setVisible(false);
             vboxCategory.setVisible(true);
         }
     }
