@@ -346,7 +346,7 @@ public class Controller {
 
     private static List<Integer> drawQuestions() {
         List<Integer> draw = new ArrayList<>();
-        for (int i = 0; i <= 129; i += 6) {
+        for (int i = 0; i <= 179; i += 6) {
             draw.add(i);
         }
         Collections.shuffle(draw);
@@ -694,10 +694,10 @@ public class Controller {
         String category = drawCategory();
         randomQuestions = drawQuestions();
         setCategory(category);
-        server.sendCategory(category);
         for (Integer randomQuestion : randomQuestions) {
             server.sendQuestion(String.valueOf(randomQuestion));
         }
+        server.sendCategory(category);
         switchToQuiz();
     }
 
