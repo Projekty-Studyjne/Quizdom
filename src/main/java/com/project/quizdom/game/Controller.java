@@ -823,10 +823,12 @@ public class Controller {
             if (this.state == State.MP_CLIENT) {
                 this.listNicknameClient.get(this.connectedUsers).setText(user.getNickname());
                 this.lstClientUsers.getItems().get(this.connectedUsers).setVisible(true);
+                clientNickname= user.getNickname();
                 this.connectedUsers++;
             } else if (this.state == State.MP_SERVER) {
                 this.listNicknameServer.get(this.connectedUsers).setText(user.getNickname());
                 this.lstServerUsers.getItems().get(this.connectedUsers).setVisible(true);
+                serverNickname= user.getNickname();
                 this.connectedUsers++;
                 this.btnStartGame.setDisable(true);
             }
