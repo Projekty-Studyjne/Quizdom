@@ -137,7 +137,6 @@ public class Client implements IClient {
                             }
                             case QUIZ: {
                                 controller.setScore(incomingMessage.getContent());
-                                controller.setServerNickname(incomingMessage.getNickname());
                                 break;
                             }
                             case END:{

@@ -203,7 +203,6 @@ public class Server implements IServer {
                             }
                             case QUIZ: {
                                 controller.setScore(incomingMsg.getContent());
-                                controller.setClientNickname(incomingMsg.getNickname());
                                 break;
                             }
                             case PLAY_AGAIN: {

@@ -630,7 +630,7 @@ public class Controller {
                 lblResult.setText("DRAW");
             }
         } else if (this.state == State.MP_SERVER) {
-            this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + ": " + clientScore);
+            this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + ": " + clientNickname);
             if (clientScore > serverScore) {
                 lblResult.setText("SKILL ISSUE :(");
             } else if (clientScore < serverScore) {
