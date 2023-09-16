@@ -141,7 +141,6 @@ public class Controller {
         randomCategory = new ArrayList<>();
 
         this.vboxPlay.setVisible(true);
-        this.vboxBack.setVisible(true);
         this.vboxQuiz.setVisible(false);
         this.vboxCategory.setVisible(false);
         this.vboxScore.setVisible(false);
@@ -561,8 +560,10 @@ public class Controller {
 
     @FXML
     public void onPlayAgainClicked() throws IOException {
-        btnPlayAgain.setDisable(true);
-        playAgain();
+        closeConnection();
+        state=State.MULTIPLAYER;
+        vboxScore.setVisible(false);
+        vboxPlay.setVisible(true);
     }
 
     public void playAgain() throws IOException {
@@ -760,12 +761,14 @@ public class Controller {
     public void switchToServerRoom() {
         this.vboxCreateRoom.setVisible(false);
         this.vboxServerLobby.setVisible(true);
+        this.vboxBack.setVisible(true);
         this.state = State.MP_SERVER;
     }
 
     public void switchToClientRoom() {
         this.vboxJoinRoom.setVisible(false);
         this.vboxClientLobby.setVisible(true);
+        this.vboxBack.setVisible(true);
         this.state = State.MP_CLIENT;
     }
 
