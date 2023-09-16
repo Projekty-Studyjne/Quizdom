@@ -181,7 +181,6 @@ public class Server implements IServer {
                                     mReply.setMsgType(MessageType.CONNECT_OK);
                                     mReply.setNickname(nickname);
                                     mReply.setContent(getUserList());
-                                    controller.setClientNickname();
                                 }
                                 output.writeObject(mReply);
                                 break;
@@ -194,6 +193,7 @@ public class Server implements IServer {
                                         break;
                                     }
                                 }
+                                controller.setClientNickname();
                                 controller.enableStartGame(checkCanStartGame());
                                 break;
                             }
