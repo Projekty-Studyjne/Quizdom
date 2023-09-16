@@ -18,10 +18,6 @@ public class Client implements IClient {
     private final String nickname;
     private ObjectOutputStream output;
 
-    public String getNickname() {
-        return nickname;
-    }
-
     public Client(Controller controller, String address, int port, String nickname) {
         this.controller = controller;
         this.nickname = nickname;
@@ -112,7 +108,6 @@ public class Client implements IClient {
                             }
                             case USER_JOINED: {
                                 controller.addUser(new User(incomingMessage.getNickname()));
-                                controller.setClientNickname();
                                 break;
                             }
                             case READY: {

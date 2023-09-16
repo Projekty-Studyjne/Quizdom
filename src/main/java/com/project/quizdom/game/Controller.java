@@ -95,8 +95,6 @@ public class Controller {
     @FXML
     private Button btnCreateRoom;
     @FXML
-    private Button btnPlayAgain;
-    @FXML
     private ListView<HBox> lstClientUsers;
     @FXML
     private ListView<HBox> lstServerUsers;
@@ -127,8 +125,6 @@ public class Controller {
     private static List<Integer> randomQuestions;
     private static int j = 1;
     private static int ready = 0;
-    private String clientNickname;
-    private String serverNickname;
     private static final Pattern PATTERN_NICKNAME = Pattern.compile("^[a-zA-Z0-9]{3,15}$");
     private static final Pattern PATTERN_IP = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
@@ -418,25 +414,25 @@ public class Controller {
     }
 
     @FXML
-    void onBtnAClicked() throws IOException {
+    void onBtnAClicked() {
         checkAnswer("A");
         disableAll();
     }
 
     @FXML
-    void onBtnBClicked() throws IOException {
+    void onBtnBClicked() {
         checkAnswer("B");
         disableAll();
     }
 
     @FXML
-    void onBtnCClicked() throws IOException {
+    void onBtnCClicked() {
         checkAnswer("C");
         disableAll();
     }
 
     @FXML
-    void onBtnDClicked() throws IOException {
+    void onBtnDClicked() {
         checkAnswer("D");
         disableAll();
     }
@@ -566,13 +562,13 @@ public class Controller {
     @FXML
     public void onPlayAgainClicked() throws IOException {
         closeConnection();
-        state=State.MULTIPLAYER;
+        state = State.MULTIPLAYER;
         timer.cancel();
         vboxScore.setVisible(false);
         vboxPlay.setVisible(true);
     }
 
-    public void checkAnswer(String answer) throws IOException {
+    public void checkAnswer(String answer) {
         if (this.state == State.MP_CLIENT) {
             if (currentAnswer.contains(answer)) {
                 clientScore++;
@@ -605,7 +601,7 @@ public class Controller {
         this.vboxScore.setVisible(true);
         this.vboxQuiz.setVisible(false);
         if (this.state == State.MP_CLIENT) {
-            this.lblScore.setText(clientNickname + ": " + clientScore + "---" + serverScore + " :" + serverNickname);
+            this.lblScore.setText(clientScore + "---" + serverScore);
             if (clientScore > serverScore) {
                 lblResult.setText("YOU WIN!!!");
             } else if (clientScore < serverScore) {
@@ -614,7 +610,7 @@ public class Controller {
                 lblResult.setText("DRAW");
             }
         } else if (this.state == State.MP_SERVER) {
-            this.lblScore.setText(serverNickname + ": " + serverScore + "---" + clientScore + " :" + clientNickname);
+            this.lblScore.setText(serverScore + "---" + clientScore);
             if (clientScore > serverScore) {
                 lblResult.setText("SKILL ISSUE :(");
             } else if (clientScore < serverScore) {
@@ -623,14 +619,6 @@ public class Controller {
                 lblResult.setText("DRAW");
             }
         }
-    }
-
-    public void setClientNickname() {
-        clientNickname = client.getNickname();
-    }
-
-    public void setServerNickname() {
-        serverNickname = server.getNickname();
     }
 
     public void setCategory(String category) throws IOException {

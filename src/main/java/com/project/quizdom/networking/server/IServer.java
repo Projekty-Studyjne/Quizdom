@@ -4,7 +4,6 @@ import java.io.IOException;
 
 public interface IServer {
     boolean checkCanStartGame();
-    String getNickname();
     void sendClose() throws IOException;
     void sendStartGame() throws IOException;
     void sendCategory(String category) throws IOException;

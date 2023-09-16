@@ -4,10 +4,8 @@ import com.project.quizdom.game.Controller;
 import com.project.quizdom.model.Message;
 import com.project.quizdom.model.MessageType;
 import com.project.quizdom.model.User;
-import javafx.scene.control.Alert;
 
 import java.io.*;
-import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 
 public class Server implements IServer {
     private static final int PORT = 9001;
-    private int maxNumUsers;
+    private final int maxNumUsers;
     private final Controller controller;
     private final String nickname;
     private final ArrayList<User> users;
@@ -36,10 +34,6 @@ public class Server implements IServer {
         this.serverListener.start();
         this.controller.switchToServerRoom();
 
-    }
-
-    public String getNickname() {
-        return nickname;
     }
 
     @Override
@@ -193,7 +187,6 @@ public class Server implements IServer {
                                         break;
                                     }
                                 }
-                                controller.setServerNickname();
                                 controller.enableStartGame(checkCanStartGame());
                                 break;
                             }
