@@ -295,6 +295,11 @@ public class Controller {
                 currentAnswer = questions.get(i++);
             });
         } else {
+            if (this.state == State.MP_CLIENT) {
+                client.sendScore(clientScore);
+            } else if (this.state == State.MP_SERVER) {
+                server.sendScore(serverScore);
+            }
             setEndingScore();
         }
     }
@@ -567,38 +572,15 @@ public class Controller {
         vboxPlay.setVisible(true);
     }
 
-    public void playAgain() throws IOException {
-        if (this.state == State.MP_CLIENT) {
-            client.sendPlayAgain();
-        } else if (this.state == State.MP_SERVER) {
-            playAgainReady();
-            if (getReady() == 2) {
-                server.sendStartGame();
-                startGame();
-            }
-        }
-    }
-
-    public void playAgainReady() {
-        ready++;
-    }
-
-    public int getReady() {
-        return ready;
-    }
-
     public void checkAnswer(String answer) throws IOException {
         if (this.state == State.MP_CLIENT) {
             if (currentAnswer.contains(answer)) {
-                client.sendCorrectAnswer(clientScore++);
-            } else {
-                client.sendWrongAnswer(clientScore);
+                clientScore++;
             }
         } else if (this.state == State.MP_SERVER) {
             if (currentAnswer.contains(answer)) {
                 serverScore++;
             }
-            server.sendScore(serverScore);
         }
     }
 
@@ -643,12 +625,12 @@ public class Controller {
         }
     }
 
-    public void setClientNickname(String nickname) {
-        clientNickname = nickname;
+    public void setClientNickname() {
+        clientNickname = client.getNickname();
     }
 
-    public void setServerNickname(String nickname) {
-        serverNickname = nickname;
+    public void setServerNickname() {
+        serverNickname = server.getNickname();
     }
 
     public void setCategory(String category) throws IOException {
@@ -865,9 +847,8 @@ public class Controller {
         }
     }
 
-    public void removeUser(String nickname) {
+    public void removeUser() {
         Platform.runLater(() -> {
-            boolean found = false;
             if (this.state == State.MP_CLIENT) {
                 this.lstClientUsers.getItems().get(this.connectedUsers - 1).setVisible(false);
                 this.listNicknameClient.get(this.connectedUsers - 1).setText("");

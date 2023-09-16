@@ -38,6 +38,10 @@ public class Server implements IServer {
 
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
     @Override
     public boolean checkCanStartGame() {
         for (User user : this.users) {
@@ -177,7 +181,7 @@ public class Server implements IServer {
                                     mReply.setMsgType(MessageType.CONNECT_OK);
                                     mReply.setNickname(nickname);
                                     mReply.setContent(getUserList());
-                                    controller.setClientNickname(incomingMsg.getNickname());
+                                    controller.setClientNickname();
                                 }
                                 output.writeObject(mReply);
                                 break;
@@ -208,14 +212,8 @@ public class Server implements IServer {
                                 controller.setScore(incomingMsg.getContent());
                                 break;
                             }
-                            case PLAY_AGAIN: {
-                                controller.playAgainReady();
-                                if (controller.getReady() == 2) {
-                                    controller.startGame();
-                                }
-                            }
                             case DISCONNECT: {
-                                controller.removeUser(incomingMsg.getNickname());
+                                controller.removeUser();
                                 for (int i = 1; i < users.size(); i++) {
                                     if (users.get(i).getNickname().equals(incomingMsg.getNickname())) {
                                         users.remove(i);

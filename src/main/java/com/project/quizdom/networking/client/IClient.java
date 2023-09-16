@@ -3,14 +3,12 @@ package com.project.quizdom.networking.client;
 import java.io.IOException;
 
 public interface IClient {
-    public void sendReady(boolean ready) throws IOException;
+    void sendReady(boolean ready) throws IOException;
+    String getNickname();
+    void sendClose() throws IOException;
 
-    public void sendClose() throws IOException;
+    void sendCategory(String category) throws IOException;
+    void sendScore(int score) throws IOException;
+    void sendEnding() throws IOException;
 
-    public void sendCategory(String category) throws IOException;
-    public void sendCorrectAnswer(int score) throws IOException;
-    public void sendWrongAnswer(int score) throws IOException;
-    public void sendEnding() throws IOException;
-
-    void sendPlayAgain() throws IOException;
 }

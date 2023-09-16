@@ -18,6 +18,10 @@ public class Client implements IClient {
     private final String nickname;
     private ObjectOutputStream output;
 
+    public String getNickname() {
+        return nickname;
+    }
+
     public Client(Controller controller, String address, int port, String nickname) {
         this.controller = controller;
         this.nickname = nickname;
@@ -48,27 +52,15 @@ public class Client implements IClient {
     }
 
     @Override
-    public void sendCorrectAnswer(int score) throws IOException {
+    public void sendScore(int score) throws IOException {
         Message message = new Message(MessageType.QUIZ, this.nickname, String.valueOf(score));
         this.sendMessage(message);
 
-    }
-
-    @Override
-    public void sendWrongAnswer(int score) throws IOException {
-        Message message = new Message(MessageType.QUIZ, this.nickname, String.valueOf(score));
-        this.sendMessage(message);
     }
 
     @Override
     public void sendEnding() throws IOException {
         Message message = new Message(MessageType.END, this.nickname, "");
-        this.sendMessage(message);
-    }
-
-    @Override
-    public void sendPlayAgain() throws IOException {
-        Message message = new Message(MessageType.PLAY_AGAIN, this.nickname, "");
         this.sendMessage(message);
     }
 
@@ -120,7 +112,7 @@ public class Client implements IClient {
                             }
                             case USER_JOINED: {
                                 controller.addUser(new User(incomingMessage.getNickname()));
-                                controller.setServerNickname(incomingMessage.getNickname());
+                                controller.setServerNickname();
                                 break;
                             }
                             case READY: {
@@ -152,7 +144,7 @@ public class Client implements IClient {
                                 if (incomingMessage.getNickname().equals(nickname)) {
                                     controller.switchToMP();
                                 } else {
-                                    controller.removeUser(incomingMessage.getNickname());
+                                    controller.removeUser();
                                     break;
                                 }
                             }
