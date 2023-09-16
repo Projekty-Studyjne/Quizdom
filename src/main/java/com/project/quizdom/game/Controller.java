@@ -562,6 +562,7 @@ public class Controller {
     public void onPlayAgainClicked() throws IOException {
         closeConnection();
         state=State.MULTIPLAYER;
+        timer.cancel();
         vboxScore.setVisible(false);
         vboxPlay.setVisible(true);
     }
