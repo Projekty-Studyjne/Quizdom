@@ -135,7 +135,8 @@ public class Controller {
         this.state = State.MULTIPLAYER;
         randomQuestions = new ArrayList<>();
         randomCategory = new ArrayList<>();
-
+        btnJoinRoom.setDisable(true);
+        btnCreateRoom.setDisable(true);
         this.vboxPlay.setVisible(true);
         this.vboxQuiz.setVisible(false);
         this.vboxCategory.setVisible(false);
@@ -354,12 +355,14 @@ public class Controller {
     public void onPlayClicked() {
         this.vboxPlay.setVisible(false);
         this.vboxCreateRoom.setVisible(true);
+        this.vboxBack.setVisible(true);
         this.state = State.MP_CREATE;
     }
 
     @FXML
     public void onJoinClicked() {
         this.vboxPlay.setVisible(false);
+        this.vboxBack.setVisible(true);
         this.vboxJoinRoom.setVisible(true);
         this.state = State.MP_JOIN;
     }
@@ -484,12 +487,14 @@ public class Controller {
     void onBackClicked() throws IOException {
         switch (this.state) {
             case MP_CREATE: {
+                this.vboxBack.setVisible(false);
                 this.vboxCreateRoom.setVisible(false);
                 this.vboxPlay.setVisible(true);
                 this.state = State.MULTIPLAYER;
                 break;
             }
             case MP_JOIN: {
+                this.vboxBack.setVisible(false);
                 this.vboxJoinRoom.setVisible(false);
                 this.vboxPlay.setVisible(true);
                 this.state = State.MULTIPLAYER;
@@ -497,6 +502,7 @@ public class Controller {
             }
             case MP_SERVER: {
                 this.closeConnection();
+                this.vboxBack.setVisible(false);
                 this.vboxServerLobby.setVisible(false);
                 this.vboxPlay.setVisible(true);
                 this.state = State.MULTIPLAYER;
@@ -504,6 +510,7 @@ public class Controller {
             }
             case MP_CLIENT: {
                 this.closeConnection();
+                this.vboxBack.setVisible(false);
                 this.vboxClientLobby.setVisible(false);
                 this.vboxPlay.setVisible(true);
                 this.state = State.MULTIPLAYER;
@@ -716,6 +723,7 @@ public class Controller {
             this.vboxCategory.setVisible(false);
             this.vboxScore.setVisible(false);
             this.vboxPlay.setVisible(true);
+            this.vboxBack.setVisible(false);
             this.state = State.MULTIPLAYER;
         } else if (this.state == State.MP_SERVER) {
             this.vboxServerLobby.setVisible(false);
@@ -723,6 +731,7 @@ public class Controller {
             this.vboxCategory.setVisible(false);
             this.vboxScore.setVisible(false);
             this.vboxPlay.setVisible(true);
+            this.vboxBack.setVisible(false);
             this.state = State.MULTIPLAYER;
         }
     }
