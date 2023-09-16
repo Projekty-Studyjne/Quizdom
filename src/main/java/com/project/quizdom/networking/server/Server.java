@@ -193,7 +193,7 @@ public class Server implements IServer {
                                         break;
                                     }
                                 }
-                                controller.setClientNickname();
+                                controller.setServerNickname();
                                 controller.enableStartGame(checkCanStartGame());
                                 break;
                             }

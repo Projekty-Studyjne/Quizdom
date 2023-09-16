@@ -112,7 +112,7 @@ public class Client implements IClient {
                             }
                             case USER_JOINED: {
                                 controller.addUser(new User(incomingMessage.getNickname()));
-                                controller.setServerNickname();
+                                controller.setClientNickname();
                                 break;
                             }
                             case READY: {
