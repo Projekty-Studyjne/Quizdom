@@ -291,11 +291,6 @@ public class Controller {
                 currentAnswer = questions.get(i++);
             });
         } else {
-            if (this.state == State.MP_CLIENT) {
-                client.sendScore(clientScore);
-            } else if (this.state == State.MP_SERVER) {
-                server.sendScore(serverScore);
-            }
             setEndingScore();
         }
     }
@@ -414,25 +409,25 @@ public class Controller {
     }
 
     @FXML
-    void onBtnAClicked() {
+    void onBtnAClicked() throws IOException {
         checkAnswer("A");
         disableAll();
     }
 
     @FXML
-    void onBtnBClicked() {
+    void onBtnBClicked() throws IOException {
         checkAnswer("B");
         disableAll();
     }
 
     @FXML
-    void onBtnCClicked() {
+    void onBtnCClicked() throws IOException {
         checkAnswer("C");
         disableAll();
     }
 
     @FXML
-    void onBtnDClicked() {
+    void onBtnDClicked() throws IOException {
         checkAnswer("D");
         disableAll();
     }
@@ -568,15 +563,18 @@ public class Controller {
         vboxPlay.setVisible(true);
     }
 
-    public void checkAnswer(String answer) {
+    public void checkAnswer(String answer) throws IOException {
         if (this.state == State.MP_CLIENT) {
             if (currentAnswer.contains(answer)) {
                 clientScore++;
             }
+            client.sendScore(clientScore);
+
         } else if (this.state == State.MP_SERVER) {
             if (currentAnswer.contains(answer)) {
                 serverScore++;
             }
+            server.sendScore(serverScore);
         }
     }
 
