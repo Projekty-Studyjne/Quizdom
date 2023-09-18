@@ -3,109 +3,733 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.quizdom.game.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.quizdom.game.Controller">
    <children>
-      <VBox fx:id="vboxPlay" fillWidth="false" layoutX="3.0" layoutY="3.0" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <VBox fx:id="vboxPlay" fillWidth="false" layoutX="-3.0" layoutY="-3.0" prefHeight="507.0" prefWidth="639.0" style="-fx-background-color: #202124;" visible="false">
          <children>
-            <Button fx:id="btnPlay" mnemonicParsing="false" onMouseClicked="#onPlayClicked" prefHeight="83.0" prefWidth="409.0" text="Play">
+            <Button fx:id="btnPlay" mnemonicParsing="false" onMouseClicked="#onPlayClicked" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6; -fx-alignment: center;" text="Play" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets left="100.0" top="100.0" />
-               </VBox.margin></Button>
-            <Button fx:id="btnJoinCreate" mnemonicParsing="false" onMouseClicked="#onJoinClicked" prefHeight="102.0" prefWidth="309.0" text="Join" />
-         </children>
-      </VBox>
-      <VBox fx:id="vboxCreateRoom" prefHeight="501.0" prefWidth="633.0" visible="false">
-         <children>
-            <Text fx:id="lblCreateRoom" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Room" wrappingWidth="209.13671875" />
-            <Text fx:id="lblNicknameCreate" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:" wrappingWidth="159.13671875" />
-            <TextField fx:id="txtNicknameCreate" maxWidth="200.0" onKeyPressed="#validateNicknameServer" prefHeight="33.0" prefWidth="325.0">
-               <VBox.margin>
-                  <Insets left="200.0" />
+                  <Insets left="175.0" top="130.0" />
                </VBox.margin>
-            </TextField>
-            <Text fx:id="lblErrorNicknameServer" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR!!!" wrappingWidth="293.13671875" />
-            <Button fx:id="btnCreateRoom" mnemonicParsing="false" onMouseClicked="#onCreateRoomClicked" prefHeight="35.0" prefWidth="529.0" text="Create new room" />
-         </children></VBox>
-      <VBox fx:id="vboxJoinRoom" prefHeight="501.0" prefWidth="633.0" visible="false">
-         <children>
-            <Text fx:id="lblJoinRoom" strokeType="OUTSIDE" strokeWidth="0.0" text="Join room" wrappingWidth="194.13671875" />
-            <Text fx:id="lblNicknameJoin" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:" wrappingWidth="131.5" />
-            <TextField fx:id="txtNicknameJoin" onKeyTyped="#validateNicknameAddressClient" />
-            <Text fx:id="lblErrorNicknameClient" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR!" wrappingWidth="52.13671875" />
-            <Text fx:id="lblIPAddressJoin" strokeType="OUTSIDE" strokeWidth="0.0" text="IP address:" wrappingWidth="119.13671875" />
-            <TextField fx:id="txtIPAddress" onKeyPressed="#validateNicknameAddressClient" />
-            <Text fx:id="lblErrorIP" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR!" wrappingWidth="65.13671875" />
-            <Button fx:id="btnJoinRoom" mnemonicParsing="false" onMouseClicked="#onJoinExistingRoomClicked" text="Join" />
-         </children>
-      </VBox>
-      <VBox fx:id="vboxClientLobby" prefHeight="501.0" prefWidth="633.0" visible="false">
-         <children>
-            <Text fx:id="lblUserListClient" strokeType="OUTSIDE" strokeWidth="0.0" text="User list:" wrappingWidth="154.783203125" />
-            <ListView fx:id="lstClientUsers" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="btnReady" mnemonicParsing="false" onMouseClicked="#onReadyClicked" text="Not Ready" />
-         </children>
-      </VBox>
-      <VBox fx:id="vboxServerLobby" prefHeight="501.0" prefWidth="633.0" visible="false">
-         <children>
-            <Text fx:id="lblIPAddressServer" strokeType="OUTSIDE" strokeWidth="0.0" text="Server IP address: X.X.X.X" wrappingWidth="293.13671875" />
-            <ListView fx:id="lstServerUsers" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="btnStartGame" mnemonicParsing="false" onMouseClicked="#onStartGameClicked" text="Start game" />
-         </children>
-      </VBox>
-      <VBox fx:id="vboxCategory" prefHeight="501.0" prefWidth="633.0" visible="false">
-         <children>
-            <Button fx:id="btnCategoryMath" mnemonicParsing="false" onMouseClicked="#onCategoryMathClicked" text="Math" />
-            <Button fx:id="btnCategoryGeneralKnowledge" mnemonicParsing="false" onMouseClicked="#onCategoryGeneralKnowledgeClicked" text="General Knowledge" />
-            <Button fx:id="btnCategoryPhysics" mnemonicParsing="false" onMouseClicked="#onCategoryPhysicsClicked" text="Physics" />
-            <Button fx:id="btnCategoryBiology" mnemonicParsing="false" onMouseClicked="#onCategoryBiologyClicked" text="Biology" />
-            <Button fx:id="btnCategoryHistory" mnemonicParsing="false" onMouseClicked="#onCategoryHistoryClicked" text="History" />
-            <Button fx:id="btnCategoryGeography" mnemonicParsing="false" onMouseClicked="#onCategoryGeographyClicked" text="Geography" />
-            <Button fx:id="btnCategoryReligion" mnemonicParsing="false" onMouseClicked="#onCategoryReligionClicked" text="Religion" />
-            <Button fx:id="btnCategoryMusic" mnemonicParsing="false" onMouseClicked="#onCategoryMusicClicked" text="Music" />
-         </children>
-      </VBox>
-      <VBox fx:id="vboxQuiz" prefHeight="400.0" prefWidth="600.0" visible="false">
-         <children>
-            <Text fx:id="lblQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="340.13671875" />
-            <Button fx:id="btnA" mnemonicParsing="false" onMouseClicked="#onBtnAClicked" text="A" />
-            <Button fx:id="btnB" mnemonicParsing="false" onMouseClicked="#onBtnBClicked" text="B" />
-            <Button fx:id="btnC" mnemonicParsing="false" onMouseClicked="#onBtnCClicked" text="C" />
-            <Button fx:id="btnD" mnemonicParsing="false" onMouseClicked="#onBtnDClicked" text="D" />
-            <Text fx:id="lblTimer" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="419.13671875" />
-         </children>
-      </VBox>
-      <VBox fx:id="vboxScore" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Text fx:id="lblScoreText" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="278.71484375">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
                <font>
-                  <Font size="64.0" />
+                  <Font size="24.0" />
+               </font></Button>
+            <Button fx:id="btnJoinCreate" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onJoinClicked" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6; -fx-alignment: center;" text="Join" textAlignment="CENTER">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="Marlett" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="175.0" top="20.0" />
+               </VBox.margin></Button>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+      <VBox fx:id="vboxCreateRoom" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+         <children>
+            <Text fx:id="lblCreateRoom" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Room" textAlignment="CENTER" wrappingWidth="209.13671875">
+               <font>
+                  <Font name="Marlett" size="24.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.007662835249042145">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <VBox.margin>
+                  <Insets left="210.0" top="100.0" />
+               </VBox.margin></Text>
+            <Text fx:id="lblNicknameCreate" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:" wrappingWidth="159.13671875">
+               <font>
+                  <Font name="Marlett" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="200.0" top="30.0" />
+               </VBox.margin></Text>
+            <TextField fx:id="txtNicknameCreate" maxHeight="35.0" maxWidth="220.0" onKeyPressed="#validateNicknameServer" prefHeight="35.0" prefWidth="220.0" style="-fx-background-color: #34353B; -fx-border-color: #729EFD;" text="okoko">
+               <VBox.margin>
+                  <Insets left="200.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text fx:id="lblErrorNicknameServer" fill="#ee5454" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR!!!" wrappingWidth="293.13671875">
+               <VBox.margin>
+                  <Insets left="200.0" top="3.0" />
+               </VBox.margin></Text>
+            <Button fx:id="btnCreateRoom" mnemonicParsing="false" onMouseClicked="#onCreateRoomClicked" prefHeight="80.0" prefWidth="280.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="Create new room">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="173.0" top="30.0" />
+               </VBox.margin>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+         </children></VBox>
+      <VBox fx:id="vboxJoinRoom" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+         <children>
+            <Text fx:id="lblJoinRoom" strokeType="OUTSIDE" strokeWidth="0.0" text="Join room" textAlignment="CENTER" wrappingWidth="194.13671875">
+               <font>
+                  <Font name="Marlett" size="24.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <VBox.margin>
+                  <Insets left="220.0" top="50.0" />
+               </VBox.margin></Text>
+            <Text fx:id="lblNicknameJoin" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname:" wrappingWidth="131.5">
+               <VBox.margin>
+                  <Insets left="210.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
                </font></Text>
-            <Text fx:id="lblResult" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="613.13671875">
+            <TextField fx:id="txtNicknameJoin" maxHeight="35.0" maxWidth="220.0" minHeight="35.0" minWidth="220.0" onKeyTyped="#validateNicknameAddressClient" prefHeight="35.0" prefWidth="220.0" style="-fx-border-color: #729EFD; -fx-background-color: #34353B;">
+               <VBox.margin>
+                  <Insets left="210.0" top="3.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Marlett" size="14.0" />
+               </font></TextField>
+            <Text fx:id="lblErrorNicknameClient" fill="#ee5454" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR!" wrappingWidth="52.13671875">
+               <VBox.margin>
+                  <Insets left="210.0" top="3.0" />
+               </VBox.margin></Text>
+            <Text fx:id="lblIPAddressJoin" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="IP address:" wrappingWidth="119.13671875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="210.0" top="15.0" />
+               </VBox.margin></Text>
+            <TextField fx:id="txtIPAddress" maxHeight="35.0" maxWidth="220.0" minHeight="35.0" minWidth="220.0" onKeyPressed="#validateNicknameAddressClient" prefHeight="35.0" prefWidth="220.0" style="-fx-border-color: #729EFD; -fx-background-color: #34353B;">
+               <VBox.margin>
+                  <Insets left="210.0" top="5.0" />
+               </VBox.margin></TextField>
+            <Text fx:id="lblErrorIP" fill="#ee5454" strokeType="OUTSIDE" strokeWidth="0.0" text="ERROR!" wrappingWidth="65.13671875">
+               <VBox.margin>
+                  <Insets left="210.0" top="3.0" />
+               </VBox.margin></Text>
+            <Button fx:id="btnJoinRoom" mnemonicParsing="false" onMouseClicked="#onJoinExistingRoomClicked" prefHeight="80.0" prefWidth="280.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Join">
+               <VBox.margin>
+                  <Insets left="180.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.007662835249042145">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxClientLobby" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+         <children>
+            <Text fx:id="lblUserListClient" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="User list:" wrappingWidth="154.783203125">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="41.0" top="20.0" />
+               </VBox.margin></Text>
+            <ListView fx:id="lstClientUsers" editable="true" maxWidth="550.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #729EFD; -fx-background-color: #34353B;">
+               <VBox.margin>
+                  <Insets left="41.0" />
+               </VBox.margin></ListView>
+            <Button fx:id="btnReady" mnemonicParsing="false" onMouseClicked="#onReadyClicked" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Not Ready">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.007662835249042145">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <VBox.margin>
+                  <Insets left="160.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Marlett" size="24.0" />
+               </font></Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxServerLobby" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+         <children>
+            <Text fx:id="lblIPAddressServer" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Server IP address: X.X.X.X" wrappingWidth="293.13671875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="41.0" top="20.0" />
+               </VBox.margin></Text>
+            <ListView fx:id="lstServerUsers" maxWidth="550.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #729EFD; -fx-background-color: #34353B;">
+               <VBox.margin>
+                  <Insets left="41.0" />
+               </VBox.margin></ListView>
+            <Button fx:id="btnStartGame" mnemonicParsing="false" onMouseClicked="#onStartGameClicked" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Start game">
+               <VBox.margin>
+                  <Insets left="160.0" top="20.0" />
+               </VBox.margin>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font size="24.0" />
+               </font></Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxCategory" alignment="CENTER" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnCategoryHistory" mnemonicParsing="false" onMouseClicked="#onCategoryHistoryClicked" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="History">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCategoryMusic" mnemonicParsing="false" onMouseClicked="#onCategoryMusicClicked" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="Music">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCategoryMath" mnemonicParsing="false" onMouseClicked="#onCategoryMathClicked" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="Math">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnCategoryReligion" mnemonicParsing="false" onMouseClicked="#onCategoryReligionClicked" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Religion">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCategoryGeography" mnemonicParsing="false" onMouseClicked="#onCategoryGeographyClicked" prefHeight="60.0" prefWidth="120.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Geography">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCategoryBiology" mnemonicParsing="false" onMouseClicked="#onCategoryBiologyClicked" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Biology">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnCategoryPhysics" mnemonicParsing="false" onMouseClicked="#onCategoryPhysicsClicked" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Physics">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCategoryGeneralKnowledge" mnemonicParsing="false" onMouseClicked="#onCategoryGeneralKnowledgeClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="General Knowledge">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Marlett" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxQuiz" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;">
+         <children>
+            <Text fx:id="lblQuestion" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="340.13671875">
+               <font>
+                  <Font name="Marlett" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="140.0" top="70.0" />
+               </VBox.margin></Text>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnA" mnemonicParsing="false" onMouseClicked="#onBtnAClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="A">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <Button fx:id="btnB" mnemonicParsing="false" onMouseClicked="#onBtnBClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="B">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnC" mnemonicParsing="false" onMouseClicked="#onBtnCClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="C">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <Button fx:id="btnD" mnemonicParsing="false" onMouseClicked="#onBtnDClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="D">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+               </children>
+            </HBox>
+            <Text fx:id="lblTimer" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="419.13671875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="110.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxScore" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+         <children>
+            <Text fx:id="lblScoreText" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" textAlignment="CENTER" wrappingWidth="278.71484375">
+               <font>
+                  <Font name="Marlett" size="64.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="180.0" top="50.0" />
+               </VBox.margin></Text>
+            <Text fx:id="lblResult" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="613.13671875">
                <font>
                   <Font size="46.0" />
                </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
             </Text>
-            <Text fx:id="lblScore" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="616.13671875">
+            <Text fx:id="lblScore" fill="#729efd" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="616.13671875">
                <font>
                   <Font size="70.0" />
-               </font></Text>
-            <Button fx:id="btnPlayAgain" mnemonicParsing="false" onMouseClicked="#onPlayAgainClicked" text="Play Again" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin></Text>
+            <Button fx:id="btnPlayAgain" mnemonicParsing="false" onMouseClicked="#onPlayAgainClicked" prefHeight="80.0" prefWidth="300.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="Play Again" textAlignment="CENTER">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <VBox.margin>
+                  <Insets left="170.0" top="20.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
-      <VBox fx:id="vboxConnecting" prefHeight="501.0" prefWidth="639.0" visible="false">
+      <VBox fx:id="vboxConnecting" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
          <children>
-            <Text fx:id="lblConnecting" strokeType="OUTSIDE" strokeWidth="0.0" text="Connecting..." wrappingWidth="629.13671875">
+            <Text fx:id="lblConnecting" strokeType="OUTSIDE" strokeWidth="0.0" text="Connecting..." textAlignment="CENTER" wrappingWidth="629.13671875">
                <font>
                   <Font size="64.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="200.0" />
+               </VBox.margin>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
             </Text>
          </children>
       </VBox>
-      <VBox fx:id="vboxBack" layoutX="14.0" layoutY="332.0" prefHeight="142.0" prefWidth="187.0" visible="false">
+      <VBox fx:id="vboxBack" layoutX="10.0" layoutY="440.0" prefHeight="50.0" prefWidth="120.0" visible="false">
          <children>
-            <Button fx:id="btnBack" mnemonicParsing="false" onMouseClicked="#onBackClicked" prefHeight="120.0" prefWidth="195.0" text="Back" />
+            <Button fx:id="btnBack" mnemonicParsing="false" onMouseClicked="#onBackClicked" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="Back">
+               <font>
+                  <Font name="Marlett" size="18.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.4470588266849518" green="0.6196078658103943" blue="0.9921568632125854" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.5411764979362488" green="0.3921568691730499" blue="0.8392156958580017" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
          </children></VBox>
    </children>
 </AnchorPane>
