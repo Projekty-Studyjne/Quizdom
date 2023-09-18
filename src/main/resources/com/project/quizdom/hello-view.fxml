@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.quizdom.game.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.quizdom.game.Controller">
    <children>
       <VBox fx:id="vboxPlay" fillWidth="false" layoutX="-3.0" layoutY="-3.0" prefHeight="507.0" prefWidth="639.0" style="-fx-background-color: #202124;" visible="false">
          <children>
@@ -519,12 +519,12 @@
                </VBox.margin></Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btnA" mnemonicParsing="false" onMouseClicked="#onBtnAClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="A">
+                  <Button fx:id="btnA" mnemonicParsing="false" onMouseClicked="#onBtnAClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-border-color: #8A64D6; -fx-background-color: #34353B;" text="A">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Marlett" size="14.0" />
                      </font>
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
@@ -543,12 +543,12 @@
                         </LinearGradient>
                      </textFill>
                   </Button>
-                  <Button fx:id="btnB" mnemonicParsing="false" onMouseClicked="#onBtnBClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="B">
+                  <Button fx:id="btnB" mnemonicParsing="false" onMouseClicked="#onBtnBClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="B">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="24.0" />
+                        <Font name="Marlett" size="14.0" />
                      </font>
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
@@ -574,9 +574,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btnC" mnemonicParsing="false" onMouseClicked="#onBtnCClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="C">
+                  <Button fx:id="btnC" mnemonicParsing="false" onMouseClicked="#onBtnCClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="C">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="14.0" />
                      </font>
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
@@ -595,12 +595,12 @@
                         </LinearGradient>
                      </textFill>
                   </Button>
-                  <Button fx:id="btnD" mnemonicParsing="false" onMouseClicked="#onBtnDClicked" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="D">
+                  <Button fx:id="btnD" mnemonicParsing="false" onMouseClicked="#onBtnDClicked" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #34353B; -fx-border-color: #8A64D6;" text="D">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="24.0" />
+                        <Font size="14.0" />
                      </font>
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
