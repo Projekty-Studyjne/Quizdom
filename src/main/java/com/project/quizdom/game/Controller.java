@@ -240,10 +240,14 @@ public class Controller {
     }
 
     private void turnOnAll() {
-        btnA.setStyle("-fx-background-color: white");
-        btnB.setStyle("-fx-background-color: white");
-        btnC.setStyle("-fx-background-color: white");
-        btnD.setStyle("-fx-background-color: white");
+        btnA.setStyle("-fx-background-color: #34353B");
+        btnB.setStyle("-fx-background-color: #34353B");
+        btnC.setStyle("-fx-background-color: #34353B");
+        btnD.setStyle("-fx-background-color: #34353B");
+        btnA.setStyle("-fx-border-color: #8A64D6");
+        btnB.setStyle("-fx-border-color: #8A64D6");
+        btnC.setStyle("-fx-border-color: #8A64D6");
+        btnD.setStyle("-fx-border-color: #8A64D6");
         btnA.setDisable(false);
         btnB.setDisable(false);
         btnC.setDisable(false);
