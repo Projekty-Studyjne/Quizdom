@@ -303,7 +303,7 @@
                </font></Button>
          </children>
       </VBox>
-      <VBox fx:id="vboxCategory" alignment="CENTER" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;" visible="false">
+      <VBox fx:id="vboxCategory" alignment="CENTER" prefHeight="501.0" prefWidth="633.0" style="-fx-background-color: #202124;">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>

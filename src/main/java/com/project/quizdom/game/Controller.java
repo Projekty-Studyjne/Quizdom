@@ -190,7 +190,7 @@ public class Controller {
             this.listNicknameServer.add(nicknameServer);
 
             readyServer.setPrefSize(25, 25);
-            readyServer.setStyle(i == 0 ? "-fx-background-color: green" : "-fx-background-color: red");
+            readyServer.setStyle(i == 0 ? "-fx-border-color: green" : "-fx-border-color: red");
             readyServer.setVisible(i != 0);
             hboxServer.getChildren().add(readyServer);
             this.listReadyServer.add(readyServer);
@@ -240,14 +240,10 @@ public class Controller {
     }
 
     private void turnOnAll() {
-        btnA.setStyle("-fx-background-color: #34353B");
-        btnB.setStyle("-fx-background-color: #34353B");
-        btnC.setStyle("-fx-background-color: #34353B");
-        btnD.setStyle("-fx-background-color: #34353B");
-        btnA.setStyle("-fx-border-color: #8A64D6");
-        btnB.setStyle("-fx-border-color: #8A64D6");
-        btnC.setStyle("-fx-border-color: #8A64D6");
-        btnD.setStyle("-fx-border-color: #8A64D6");
+        btnA.setStyle("-fx-background-color:  #34353B; -fx-border-color: #8A64D6");
+        btnB.setStyle("-fx-background-color: #34353B; -fx-border-color: #8A64D6");
+        btnC.setStyle("-fx-background-color: #34353B; -fx-border-color: #8A64D6");
+        btnD.setStyle("-fx-background-color: #34353B; -fx-border-color: #8A64D6");
         btnA.setDisable(false);
         btnB.setDisable(false);
         btnC.setDisable(false);
@@ -302,25 +298,25 @@ public class Controller {
 
     private void isCorrect() {
         if (currentAnswer.contains("A")) {
-            btnA.setStyle("-fx-background-color: green");
-            btnB.setStyle("-fx-background-color: red");
-            btnC.setStyle("-fx-background-color: red");
-            btnD.setStyle("-fx-background-color: red");
+            btnA.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:   #34353B; ");
+            btnB.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
+            btnC.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
+            btnD.setStyle("-fx-bborder-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
         } else if (currentAnswer.contains("B")) {
-            btnB.setStyle("-fx-background-color: green");
-            btnA.setStyle("-fx-background-color: red");
-            btnC.setStyle("-fx-background-color: red");
-            btnD.setStyle("-fx-background-color: red");
+            btnB.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:  #34353B;");
+            btnA.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnC.setStyle("-fx-bordercolor: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnD.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
         } else if (currentAnswer.contains("C")) {
-            btnC.setStyle("-fx-background-color: green");
-            btnA.setStyle("-fx-background-color: red");
-            btnB.setStyle("-fx-background-color: red");
-            btnD.setStyle("-fx-background-color: red");
+            btnC.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnA.setStyle("-fx-border-color: red ; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnB.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnD.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
         } else if (currentAnswer.contains("D")) {
-            btnD.setStyle("-fx-background-color: green");
-            btnA.setStyle("-fx-background-color: red");
-            btnB.setStyle("-fx-background-color: red");
-            btnC.setStyle("-fx-background-color: red");
+            btnD.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnA.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnB.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnC.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
         }
 
     }
@@ -387,7 +383,7 @@ public class Controller {
     @FXML
     public void onJoinExistingRoomClicked() {
         this.btnReady.setText("Not Ready");
-        this.btnReady.setStyle("-fx-background-color: red");
+        this.btnReady.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color: #34353B");
         this.showConnectingBox(true);
         this.client = new Client(this, this.txtIPAddress.getText(), 9001, this.txtNicknameJoin.getText());
         this.server = null;
@@ -398,12 +394,12 @@ public class Controller {
     public void onReadyClicked() throws IOException {
         if (this.btnReady.getText().equalsIgnoreCase("Ready")) {
             this.btnReady.setText("Not Ready");
-            this.btnReady.setStyle("-fx-background-color: red");
+            this.btnReady.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color: #34353B");
             this.client.sendReady(false);
             this.updateReady(this.txtNicknameJoin.getText(), false);
         } else {
             this.btnReady.setText("Ready");
-            this.btnReady.setStyle("-fx-background-color: green");
+            this.btnReady.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color: #34353B");
             this.client.sendReady(true);
             this.updateReady(this.txtNicknameJoin.getText(), true);
         }
