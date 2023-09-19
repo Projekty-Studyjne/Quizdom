@@ -734,6 +734,7 @@ public class Controller {
             this.vboxBack.setVisible(false);
             this.state = State.MULTIPLAYER;
         }
+        timer.cancel();
     }
 
     public void switchToServerRoom() {
@@ -840,6 +841,7 @@ public class Controller {
             this.server.sendClose();
             this.server = null;
         }
+        timer.cancel();
     }
 
     public void removeUser() {
