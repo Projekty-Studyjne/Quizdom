@@ -301,11 +301,11 @@ public class Controller {
             btnA.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:   #34353B; ");
             btnB.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
             btnC.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
-            btnD.setStyle("-fx-bborder-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
+            btnD.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B;");
         } else if (currentAnswer.contains("B")) {
             btnB.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:  #34353B;");
             btnA.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
-            btnC.setStyle("-fx-bordercolor: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
+            btnC.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
             btnD.setStyle("-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:  #34353B");
         } else if (currentAnswer.contains("C")) {
             btnC.setStyle("-fx-border-color: green; -fx-border-width: 3px; -fx-background-color:  #34353B");
